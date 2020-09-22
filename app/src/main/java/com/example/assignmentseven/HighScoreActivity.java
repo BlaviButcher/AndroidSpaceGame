@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class HighScoreActivity extends AppCompatActivity
         setContentView(R.layout.activity_highscore);
     }
 
-    public void onClickHighScoreBackButton()
+    public void onClickHighScoreBackButton(View view)
     {
         finish();
     }
