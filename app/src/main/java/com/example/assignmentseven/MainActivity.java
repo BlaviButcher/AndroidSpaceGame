@@ -20,11 +20,16 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     // Click event for the start button
-    public void onclickPlayHome(View view) {
-        Log.d("home","here");
+    public void onclickPlayButton(View view) {
         Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+    }
+
+    // Click event for the highscore button
+    public void onClickHighScoreButton(View view)
+    {
+        Intent i = new Intent(this, HighScoreActivity.class);
         startActivity(i);
     }
 }
