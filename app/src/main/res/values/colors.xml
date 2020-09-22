@@ -3,6 +3,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorOrangeYellowCrayola">#F4D06F</color>
     <color name="colorPurple">#6200B3</color>
+    <color name="colorDarkPurple">#310059</color>
+
     <color name="colorMiddleRed">#DB7F67</color>
     <color name="colorDarkRed">#8C1C13</color>
     <color name="colorFloralWhite">#FFF8F0</color>

@@ -42,6 +42,7 @@
         android:layout_marginBottom="100dp"
         android:background="@drawable/button_state_home"
         android:fontFamily="@font/quantico"
+        android:textColor="@color/colorOrangeYellowCrayola"
 
         android:onClick="onClickHighScoreBackButton"
 
