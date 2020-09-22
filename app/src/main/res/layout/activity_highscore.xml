@@ -8,7 +8,6 @@
 
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -26,9 +25,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <ListView
+        android:id="@+id/highscores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="183dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+    </ListView>
 
     <Button
-        android:id="@+id/home_highscore_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
 
