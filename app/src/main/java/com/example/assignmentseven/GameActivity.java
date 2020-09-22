@@ -27,6 +27,13 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamescreen);
 
+        // Hide actionbar
+        getSupportActionBar().hide();
+
+        // Enable fullscreen
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+
         // Create graphics view and add to constraintLayout
         GraphicsView graphicsView = new GraphicsView(this);
         ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.cl_gamescreen);
