@@ -44,6 +44,17 @@ public class GameActivity extends AppCompatActivity {
         constraintLayout.addView(graphicsView);
     }
 
+    protected void onResume()
+    {
+        super.onResume();
+
+        // Hide actionbar
+        getSupportActionBar().hide();
+
+        // Enable fullscreen
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
 
     // Sprite class contains the logic for a drawable on the game activity
     abstract class Sprite {

@@ -25,6 +25,17 @@ public class HighScoreActivity extends AppCompatActivity
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
+    protected void onResume()
+    {
+        super.onResume();
+
+        // Hide actionbar
+        getSupportActionBar().hide();
+
+        // Enable fullscreen
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
     public void onClickHighScoreBackButton(View view)
     {
         finish();
