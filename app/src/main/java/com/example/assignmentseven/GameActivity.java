@@ -59,9 +59,7 @@ public class GameActivity extends AppCompatActivity {
 
         // collidesWith is true when the sprites hit-boxes overlap, otherwise false
         public boolean collidesWith(Sprite other){
-            if (Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)) < this.radius + other.radius)
-                return true;
-            return false;
+            return (Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)) < this.radius + other.radius);
         }
     }
 
