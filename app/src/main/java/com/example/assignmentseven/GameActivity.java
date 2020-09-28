@@ -91,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
     abstract class DynamicSprite extends Sprite {
 
         // The speed that this object can move
-        private float velocity;
+        protected float velocity;
 
         public DynamicSprite(int x, int y, float radius, float velocity){
             super(x, y, radius);
@@ -116,12 +116,13 @@ public class GameActivity extends AppCompatActivity {
     // Laser is the main class for the laser in the game
     class Laser extends DynamicSprite {
 
-        private Paint paint = new Paint();
+        public Paint paint = new Paint();
 
         // Constructors
         public Laser(int x, int y, float radius){
             super(x, y, radius, 1);
             this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
+
         }
 
         public Laser(int x, int y, float radius, int colorId){
@@ -138,17 +139,17 @@ public class GameActivity extends AppCompatActivity {
         public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
     }
 
-    public class Target extends Sprite
+    public class Planet extends Sprite
     {
-        Paint paint = new Paint();
+        public Paint paint = new Paint();
 
-        public Target(int posX, int posY, float radius, int colorID)
+        public Planet(int posX, int posY, float radius, int colorID)
         {
             super(posX, posY, radius);
             paint.setColor(getColor(colorID));
         }
 
-        public Target(int posX, int posY, float radius)
+        public Planet(int posX, int posY, float radius)
         {
             super(posX, posY, radius);
             paint.setColor(getColor(R.color.colorDarkPurple));
@@ -166,7 +167,7 @@ public class GameActivity extends AppCompatActivity {
     // Asteroid is an obstacle in the game
     class Asteroid extends DynamicSprite {
 
-        private Paint paint = new Paint();
+        public Paint paint = new Paint();
 
         // Constructors
         public Asteroid(int x, int y, float radius){
