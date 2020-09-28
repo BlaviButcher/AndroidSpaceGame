@@ -1,6 +1,7 @@
 package com.example.assignmentseven;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -51,8 +52,10 @@ public class GameActivity extends AppCompatActivity {
         // Hide actionbar
         getSupportActionBar().hide();
 
+        
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
     }
 
 
@@ -101,6 +104,35 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
+    public class Target extends DynamicSprite
+    {
+        Paint paint = new Paint();
+
+
+        public Target(int posX, int posY, float radius, int colorID)
+        {
+            this.x = posX;
+            this.y = posY;
+            this.radius = radius;
+            paint.setColor(getColor(colorID));
+        }
+
+        public Target(int posX, int posY, float radius)
+        {
+            this.x = posX;
+            this.y = posY;
+            this.radius = radius;
+            paint.setColor(getColor(R.color.colorDarkPurple));
+        }
+
+        @Override
+        public void draw(Canvas canvas)
+        {
+            canvas.drawCircle(x, y, radius, paint);
+        }
+    }
+
 
 
 
