@@ -7,6 +7,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+
+import static java.security.AccessController.getContext;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -68,6 +71,13 @@ public class GameActivity extends AppCompatActivity {
         // Radius of the sprite hit box
         protected float radius;
 
+        // Constructor
+        public Sprite(int _x, int _y, float _radius){
+            this.x = _x;
+            this.y = _y;
+            this.radius = _radius;
+        }
+
         // Draw method will draw the sprite to the screen
         public abstract void draw(Canvas canvas);
 
@@ -83,6 +93,12 @@ public class GameActivity extends AppCompatActivity {
         // The speed that this object can move
         private float velocity;
 
+        public DynamicSprite(int _x, int _y, float _radius, float _velocity){
+            super(_x, _y, _radius);
+            this.velocity = _velocity;
+        }
+
+
         // move will move the sprite by dx * velocity, dy * velocity
         public void move(float dx, float dy) {
             this.x += dx * this.velocity;
@@ -97,12 +113,29 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    // Laser is the main class for the laser in the game
     class Laser extends DynamicSprite {
 
-        public void draw(Canvas canvas){
+        private Paint paint = new Paint();
 
+        // Constructors
+        public Laser(int _x, int _y, float _radius){
+            super(_x, _y, _radius, 1);
+            this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
         }
 
+        public Laser(int _x, int _y, float _radius, int _colorId){
+            super(_x, _y, _radius, 1);
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        public Laser(int _x, int _y, float _radius, int _colorId, float _velocity){
+            super(_x, _y, _radius, _velocity);
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        // draws to the screen
+        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
     }
 
     public class Target extends Sprite
@@ -134,5 +167,28 @@ public class GameActivity extends AppCompatActivity {
 
 
 
+    // Asteroid is an obstacle in the game
+    class Asteroid extends DynamicSprite {
 
+        private Paint paint = new Paint();
+
+        // Constructors
+        public Asteroid(int _x, int _y, float _radius){
+            super(_x, _y, _radius, 1);
+            this.paint.setColor(getColor(R.color.colorMiddleRed));
+        }
+
+        public Asteroid(int _x, int _y, float _radius, int _colorId){
+            super(_x, _y, _radius, 1);
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        public Asteroid(int _x, int _y, float _radius, int _colorId, float _velocity){
+            super(_x, _y, _radius, _velocity);
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        // draws to the screen
+        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+    }
 }
