@@ -105,10 +105,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public class Target extends DynamicSprite
+    public class Target extends Sprite
     {
         Paint paint = new Paint();
-
 
         public Target(int posX, int posY, float radius, int colorID)
         {
