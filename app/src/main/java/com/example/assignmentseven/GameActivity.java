@@ -66,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
         protected float radius;
 
         // Draw method will draw the sprite to the screen
-        public abstract void draw();
+        public abstract void draw(Canvas canvas);
 
         // collidesWith is true when the sprites hit-boxes overlap, otherwise false
         public boolean collidesWith(Sprite other){
@@ -81,15 +81,23 @@ public class GameActivity extends AppCompatActivity {
         private float velocity;
 
         // move will move the sprite by dx * velocity, dy * velocity
-        public void move(float dx, float dy){
+        public void move(float dx, float dy) {
             this.x += dx * this.velocity;
             this.y += dy * this.velocity;
 
             // check constraints
-            if (this.x  > width - this.radius) this.x = width - (int) this.radius;
-            if (this.x  < this.radius) this.x = (int) this.radius;
-            if (this.y  > height - this.radius) this.y = height - (int) this.radius;
-            if (this.y  < this.radius) this.y = (int) this.radius;
+            if (this.x > width - this.radius) this.x = width - (int) this.radius;
+            if (this.x < this.radius) this.x = (int) this.radius;
+            if (this.y > height - this.radius) this.y = height - (int) this.radius;
+            if (this.y < this.radius) this.y = (int) this.radius;
+        }
+    }
+
+
+    class Laser extends DynamicSprite {
+
+        public void draw(Canvas canvas){
+
         }
 
     }
