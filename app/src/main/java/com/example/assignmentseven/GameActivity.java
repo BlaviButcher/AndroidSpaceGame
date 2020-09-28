@@ -72,10 +72,10 @@ public class GameActivity extends AppCompatActivity {
         protected float radius;
 
         // Constructor
-        public Sprite(int _x, int _y, float _radius){
-            this.x = _x;
-            this.y = _y;
-            this.radius = _radius;
+        public Sprite(int x, int y, float radius){
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
         }
 
         // Draw method will draw the sprite to the screen
@@ -93,9 +93,9 @@ public class GameActivity extends AppCompatActivity {
         // The speed that this object can move
         private float velocity;
 
-        public DynamicSprite(int _x, int _y, float _radius, float _velocity){
-            super(_x, _y, _radius);
-            this.velocity = _velocity;
+        public DynamicSprite(int x, int y, float radius, float velocity){
+            super(x, y, radius);
+            this.velocity = velocity;
         }
 
 
@@ -119,19 +119,19 @@ public class GameActivity extends AppCompatActivity {
         private Paint paint = new Paint();
 
         // Constructors
-        public Laser(int _x, int _y, float _radius){
-            super(_x, _y, _radius, 1);
+        public Laser(int x, int y, float radius){
+            super(x, y, radius, 1);
             this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
         }
 
-        public Laser(int _x, int _y, float _radius, int _colorId){
-            super(_x, _y, _radius, 1);
-            this.paint.setColor(getColor(_colorId));
+        public Laser(int x, int y, float radius, int colorId){
+            super(x, y, radius, 1);
+            this.paint.setColor(getColor(colorId));
         }
 
-        public Laser(int _x, int _y, float _radius, int _colorId, float _velocity){
-            super(_x, _y, _radius, _velocity);
-            this.paint.setColor(getColor(_colorId));
+        public Laser(int x, int y, float radius, int colorId, float velocity){
+            super(x, y, radius, velocity);
+            this.paint.setColor(getColor(colorId));
         }
 
         // draws to the screen
@@ -144,17 +144,13 @@ public class GameActivity extends AppCompatActivity {
 
         public Target(int posX, int posY, float radius, int colorID)
         {
-            this.x = posX;
-            this.y = posY;
-            this.radius = radius;
+            super(posX, posY, radius);
             paint.setColor(getColor(colorID));
         }
 
         public Target(int posX, int posY, float radius)
         {
-            this.x = posX;
-            this.y = posY;
-            this.radius = radius;
+            super(posX, posY, radius);
             paint.setColor(getColor(R.color.colorDarkPurple));
         }
 
@@ -173,19 +169,19 @@ public class GameActivity extends AppCompatActivity {
         private Paint paint = new Paint();
 
         // Constructors
-        public Asteroid(int _x, int _y, float _radius){
-            super(_x, _y, _radius, 1);
+        public Asteroid(int x, int y, float radius){
+            super(x, y, radius, 1);
             this.paint.setColor(getColor(R.color.colorMiddleRed));
         }
 
-        public Asteroid(int _x, int _y, float _radius, int _colorId){
-            super(_x, _y, _radius, 1);
-            this.paint.setColor(getColor(_colorId));
+        public Asteroid(int x, int y, float radius, int colorId){
+            super(x, y, radius, 1);
+            this.paint.setColor(getColor(colorId));
         }
 
-        public Asteroid(int _x, int _y, float _radius, int _colorId, float _velocity){
-            super(_x, _y, _radius, _velocity);
-            this.paint.setColor(getColor(_colorId));
+        public Asteroid(int x, int y, float radius, int colorId, float velocity){
+            super(x, y, radius, velocity);
+            this.paint.setColor(getColor(colorId));
         }
 
         // draws to the screen
