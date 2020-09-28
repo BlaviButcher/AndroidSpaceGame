@@ -1,11 +1,15 @@
 package com.example.assignmentseven;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+
+import static java.security.AccessController.getContext;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -94,14 +98,27 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    // Laser is the main class for the laser in the game
     class Laser extends DynamicSprite {
 
-        public void draw(Canvas canvas){
+        private Paint paint = new Paint();
 
+        // Constructors
+        public Laser(int _x, int _y, float _radius){
+            this.x = _x;
+            this.y = _y;
+            this.radius = _radius;
+            this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
         }
 
+        public Laser(int _x, int _y, float _radius, int _colorId){
+            this.x = _x;
+            this.y = _y;
+            this.radius = _radius;
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        // draws to the screen
+        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
     }
-
-
-
 }
