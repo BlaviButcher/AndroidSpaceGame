@@ -121,4 +121,29 @@ public class GameActivity extends AppCompatActivity {
         // draws to the screen
         public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
     }
+
+
+    // Asteroid is an obstacle in the game
+    class Asteroid extends DynamicSprite {
+
+        private Paint paint = new Paint();
+
+        // Constructors
+        public Asteroid(int _x, int _y, float _radius){
+            this.x = _x;
+            this.y = _y;
+            this.radius = _radius;
+            this.paint.setColor(getColor(R.color.colorMiddleRed));
+        }
+
+        public Asteroid(int _x, int _y, float _radius, int _colorId){
+            this.x = _x;
+            this.y = _y;
+            this.radius = _radius;
+            this.paint.setColor(getColor(_colorId));
+        }
+
+        // draws to the screen
+        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+    }
 }
