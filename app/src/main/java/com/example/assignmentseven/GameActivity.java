@@ -12,23 +12,6 @@ import androidx.core.content.ContextCompat;
 import static java.security.AccessController.getContext;
 
 public class GameActivity extends AppCompatActivity {
-
-    // Dimensions of activity bounds
-    private int width, height;
-
-
-    public class GraphicsView extends View {
-        public GraphicsView(Context context) {
-            super(context);
-        }
-
-        @Override
-        public void onDraw(Canvas canvas)
-        {
-            super.onDraw(canvas);
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -62,120 +45,96 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    // Sprite class contains the logic for a drawable on the game activity
-    abstract class Sprite {
+    // Graphics view class
+    public class GraphicsView extends View {
 
-        // Position of the sprite
-        protected float x, y;
+        // Dimensions of activity bounds
+        private int width, height;
 
-        // Radius of the sprite hit box
-        protected float radius;
 
-        // Constructor
-        public Sprite(float x, float y, float radius){
-            this.x = x;
-            this.y = y;
-            this.radius = radius;
-        }
-
-        // Draw method will draw the sprite to the screen
-        public abstract void draw(Canvas canvas);
-
-        // collidesWith is true when the sprites hit-boxes overlap, otherwise false
-        public boolean collidesWith(Sprite other){
-            return (Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)) < this.radius + other.radius);
-        }
-    }
-
-    // DynamicSprite is a sprite that can move
-    abstract class DynamicSprite extends Sprite {
-
-        // The speed that this object can move
-        protected float dx,dy;
-
-        public DynamicSprite(float x, float y, float radius){
-            super(x, y, radius);
+        public GraphicsView(Context context) {
+            super(context);
         }
 
 
-        // move will move the sprite by dx * velocity, dy * velocity
-        public void move() {
-            this.x += this.dx;
-            this.y += this.dy;
-
-//            // check constraints
-//            if (this.x > width - this.radius) this.x = width - (int) this.radius;
-//            if (this.x < this.radius) this.x = (int) this.radius;
-//            if (this.y > height - this.radius) this.y = height - (int) this.radius;
-//            if (this.y < this.radius) this.y = (int) this.radius;
-        }
-    }
-
-
-    // Laser is the main class for the laser in the game
-    class Laser extends DynamicSprite {
-
-        public Paint paint = new Paint();
-
-        // Constructors
-        public Laser(int x, int y, float radius){
-            super(x, y, radius);
-            this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
-
-        }
-
-        public Laser(int x, int y, float radius, int colorId){
-            super(x, y, radius);
-            this.paint.setColor(getColor(colorId));
-        }
-
-
-        // draws to the screen
-        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
-    }
-
-    public class Planet extends Sprite
-    {
-        public Paint paint = new Paint();
-
-        public Planet(int posX, int posY, float radius, int colorID)
-        {
-            super(posX, posY, radius);
-            paint.setColor(getColor(colorID));
-        }
-
-        public Planet(int posX, int posY, float radius)
-        {
-            super(posX, posY, radius);
-            paint.setColor(getColor(R.color.colorDarkPurple));
-        }
 
         @Override
-        public void draw(Canvas canvas)
+        public void onDraw(Canvas canvas)
         {
-            canvas.drawCircle(x, y, radius, paint);
-        }
-    }
-
-
-
-    // Asteroid is an obstacle in the game
-    class Asteroid extends DynamicSprite {
-
-        public Paint paint = new Paint();
-
-        // Constructors
-        public Asteroid(float x, float y, float radius){
-            super(x, y, radius);
-            this.paint.setColor(getColor(R.color.colorMiddleRed));
-        }
-        public Asteroid(float x, float y, float radius, int colorId){
-            super(x, y, radius);
-            this.paint.setColor(getColor(colorId));
+            super.onDraw(canvas);
         }
 
 
-        // draws to the screen
-        public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+
+
+
+        // Laser is the main class for the laser in the game
+        class Laser extends DynamicSprite {
+
+            public Paint paint = new Paint();
+
+            // Constructors
+            public Laser(int x, int y, float radius){
+                super(x, y, radius);
+                this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
+
+            }
+
+            public Laser(int x, int y, float radius, int colorId){
+                super(x, y, radius);
+                this.paint.setColor(getColor(colorId));
+            }
+
+
+            // draws to the screen
+            public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+        }
+
+
+        // Planet is the 'target' in the game
+        public class Planet extends Sprite
+        {
+            public Paint paint = new Paint();
+
+            public Planet(int posX, int posY, float radius, int colorID)
+            {
+                super(posX, posY, radius);
+                paint.setColor(getColor(colorID));
+            }
+
+            public Planet(int posX, int posY, float radius)
+            {
+                super(posX, posY, radius);
+                paint.setColor(getColor(R.color.colorDarkPurple));
+            }
+
+            @Override
+            public void draw(Canvas canvas)
+            {
+                canvas.drawCircle(x, y, radius, paint);
+            }
+        }
+
+
+
+        // Asteroid is an obstacle in the game
+        class Asteroid extends DynamicSprite {
+
+            public Paint paint = new Paint();
+
+            // Constructors
+            public Asteroid(float x, float y, float radius){
+                super(x, y, radius);
+                this.paint.setColor(getColor(R.color.colorMiddleRed));
+            }
+            public Asteroid(float x, float y, float radius, int colorId){
+                super(x, y, radius);
+                this.paint.setColor(getColor(colorId));
+            }
+
+
+            // draws to the screen
+            public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+        }
     }
 }
