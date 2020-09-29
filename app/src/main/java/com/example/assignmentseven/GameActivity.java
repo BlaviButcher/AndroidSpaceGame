@@ -66,13 +66,13 @@ public class GameActivity extends AppCompatActivity {
     abstract class Sprite {
 
         // Position of the sprite
-        protected int x, y;
+        protected float x, y;
 
         // Radius of the sprite hit box
         protected float radius;
 
         // Constructor
-        public Sprite(int x, int y, float radius){
+        public Sprite(float x, float y, float radius){
             this.x = x;
             this.y = y;
             this.radius = radius;
@@ -91,24 +91,23 @@ public class GameActivity extends AppCompatActivity {
     abstract class DynamicSprite extends Sprite {
 
         // The speed that this object can move
-        protected float velocity;
+        protected float dx,dy;
 
-        public DynamicSprite(int x, int y, float radius, float velocity){
+        public DynamicSprite(float x, float y, float radius){
             super(x, y, radius);
-            this.velocity = velocity;
         }
 
 
         // move will move the sprite by dx * velocity, dy * velocity
-        public void move(float dx, float dy) {
-            this.x += dx * this.velocity;
-            this.y += dy * this.velocity;
+        public void move() {
+            this.x += this.dx;
+            this.y += this.dy;
 
-            // check constraints
-            if (this.x > width - this.radius) this.x = width - (int) this.radius;
-            if (this.x < this.radius) this.x = (int) this.radius;
-            if (this.y > height - this.radius) this.y = height - (int) this.radius;
-            if (this.y < this.radius) this.y = (int) this.radius;
+//            // check constraints
+//            if (this.x > width - this.radius) this.x = width - (int) this.radius;
+//            if (this.x < this.radius) this.x = (int) this.radius;
+//            if (this.y > height - this.radius) this.y = height - (int) this.radius;
+//            if (this.y < this.radius) this.y = (int) this.radius;
         }
     }
 
@@ -120,20 +119,16 @@ public class GameActivity extends AppCompatActivity {
 
         // Constructors
         public Laser(int x, int y, float radius){
-            super(x, y, radius, 1);
+            super(x, y, radius);
             this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
 
         }
 
         public Laser(int x, int y, float radius, int colorId){
-            super(x, y, radius, 1);
+            super(x, y, radius);
             this.paint.setColor(getColor(colorId));
         }
 
-        public Laser(int x, int y, float radius, int colorId, float velocity){
-            super(x, y, radius, velocity);
-            this.paint.setColor(getColor(colorId));
-        }
 
         // draws to the screen
         public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
@@ -170,20 +165,15 @@ public class GameActivity extends AppCompatActivity {
         public Paint paint = new Paint();
 
         // Constructors
-        public Asteroid(int x, int y, float radius){
-            super(x, y, radius, 1);
+        public Asteroid(float x, float y, float radius){
+            super(x, y, radius);
             this.paint.setColor(getColor(R.color.colorMiddleRed));
         }
-
-        public Asteroid(int x, int y, float radius, int colorId){
-            super(x, y, radius, 1);
+        public Asteroid(float x, float y, float radius, int colorId){
+            super(x, y, radius);
             this.paint.setColor(getColor(colorId));
         }
 
-        public Asteroid(int x, int y, float radius, int colorId, float velocity){
-            super(x, y, radius, velocity);
-            this.paint.setColor(getColor(colorId));
-        }
 
         // draws to the screen
         public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
