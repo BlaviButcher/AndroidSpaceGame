@@ -1,4 +1,6 @@
-package com.example.assignmentseven;
+package com.example.assignmentseven.GameClasses;
+
+import com.example.assignmentseven.GameClasses.Sprite;
 
 // DynamicSprite is a sprite that can move
 abstract class DynamicSprite extends Sprite {
@@ -6,8 +8,8 @@ abstract class DynamicSprite extends Sprite {
     // The speed that this object can move
     protected float dx,dy;
 
-    public DynamicSprite(float x, float y, float radius){
-        super(x, y, radius);
+    public DynamicSprite(GraphicsView screen, float x, float y, float radius){
+        super(screen, x, y, radius);
     }
 
 

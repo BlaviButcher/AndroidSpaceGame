@@ -1,6 +1,8 @@
-package com.example.assignmentseven;
+package com.example.assignmentseven.GameClasses;
 
 import android.graphics.Canvas;
+
+import androidx.core.content.ContextCompat;
 
 // Sprite class contains the logic for a drawable on the game activity
 abstract class Sprite {
@@ -11,8 +13,11 @@ abstract class Sprite {
     // Radius of the sprite hit box
     protected float radius;
 
+    protected GraphicsView screen;
+
     // Constructor
-    public Sprite(float x, float y, float radius){
+    public Sprite(GraphicsView screen, float x, float y, float radius){
+        this.screen = screen;
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -24,5 +29,10 @@ abstract class Sprite {
     // collidesWith is true when the sprites hit-boxes overlap, otherwise false
     public boolean collidesWith(Sprite other){
         return (Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)) < this.radius + other.radius);
+    }
+
+    // getColor implementation for these objects
+    protected int getColor(int colorId){
+        return ContextCompat.getColor(this.screen.getContext(), colorId);
     }
 }
