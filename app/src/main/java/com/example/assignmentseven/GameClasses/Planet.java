@@ -10,15 +10,15 @@ public class Planet extends Sprite
 {
     public Paint paint = new Paint();
 
-    public Planet(int posX, int posY, float radius, int colorID)
+    public Planet(GraphicsView screen, float posX, float posY, float radius, int colorID)
     {
-        super(posX, posY, radius);
+        super(screen, posX, posY, radius);
         paint.setColor(getColor(colorID));
     }
 
-    public Planet(int posX, int posY, float radius)
+    public Planet(GraphicsView screen, float posX, float posY, float radius)
     {
-        super(posX, posY, radius);
+        super(screen, posX, posY, radius);
         paint.setColor(getColor(R.color.colorDarkPurple));
     }
 

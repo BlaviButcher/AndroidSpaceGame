@@ -11,14 +11,14 @@ class Laser extends DynamicSprite {
     public Paint paint = new Paint();
 
     // Constructors
-    public Laser(int x, int y, float radius){
-        super(x, y, radius);
+    public Laser(GraphicsView screen, float x, float y, float radius){
+        super(screen, x, y, radius);
         this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
 
     }
 
-    public Laser(int x, int y, float radius, int colorId){
-        super(x, y, radius);
+    public Laser(GraphicsView screen, float x, float y, float radius, int colorId){
+        super(screen,x, y, radius);
         this.paint.setColor(getColor(colorId));
     }
 

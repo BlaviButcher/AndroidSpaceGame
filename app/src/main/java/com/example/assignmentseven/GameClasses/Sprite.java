@@ -16,7 +16,8 @@ abstract class Sprite {
     protected GraphicsView screen;
 
     // Constructor
-    public Sprite(float x, float y, float radius){
+    public Sprite(GraphicsView screen, float x, float y, float radius){
+        this.screen = screen;
         this.x = x;
         this.y = y;
         this.radius = radius;
