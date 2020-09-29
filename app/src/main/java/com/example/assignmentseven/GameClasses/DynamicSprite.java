@@ -1,4 +1,6 @@
-package com.example.assignmentseven;
+package com.example.assignmentseven.GameClasses;
+
+import com.example.assignmentseven.GameClasses.Sprite;
 
 // DynamicSprite is a sprite that can move
 abstract class DynamicSprite extends Sprite {
