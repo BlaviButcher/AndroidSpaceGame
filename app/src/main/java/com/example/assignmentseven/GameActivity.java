@@ -54,6 +54,19 @@ public class GameActivity extends AppCompatActivity {
 
         public GraphicsView(Context context) {
             super(context);
+
+            // Get initial width and height - just using screen size..
+            width = context.getResources().getDisplayMetrics().widthPixels;
+            height = context.getResources().getDisplayMetrics().heightPixels;
+        }
+
+
+        // Tracks the size of the screen
+        @Override
+        protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+            super.onSizeChanged(w, h, oldW, oldH);
+            width = w;
+            height = h;
         }
 
 
