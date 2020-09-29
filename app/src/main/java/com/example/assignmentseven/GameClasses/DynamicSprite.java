@@ -13,6 +13,11 @@ abstract class DynamicSprite extends Sprite {
     }
 
 
+    // Sets the velocity variables for a DynamicSprite
+    public void setVelocity(float dx, float dy){
+        this.dx = dx; this.dy = dy;
+    }
+
     // move will move the sprite by dx * velocity, dy * velocity
     public void move() {
         this.x += this.dx;
