@@ -30,6 +30,10 @@ public class GraphicsView extends View {
     private Laser laser = null;
 
 
+    private Asteroid[] asteroids;
+
+
+
     public GraphicsView(Context context) {
         super(context);
 
@@ -39,6 +43,14 @@ public class GraphicsView extends View {
 
         // Add gesture listener
         gestureDetector = new GestureDetector(context, new GestureListener());
+
+
+        // Create asteroids
+        asteroids = new Asteroid[3];
+        for (int i = 0; i < 3; i ++)
+        {
+            asteroids[i] = new Asteroid(this, 50);
+        }
     }
 
 
@@ -60,12 +72,28 @@ public class GraphicsView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // TODO: break into individual methods
+
         if (laser != null){
             laser.move();
             laser.draw(canvas);
             if (laser.outOfBounds()) // Check the laser is still in bounds
                 laser = null;
         }
+
+        for (Asteroid asteroid : asteroids)
+        {
+            if (asteroid != null)
+            {
+                asteroid.move();
+                asteroid.draw(canvas);
+                if (asteroid.outOfBounds(this))
+                {
+                    asteroid.respawn(this);
+                }
+            }
+        }
+
 
         invalidate();
     }
