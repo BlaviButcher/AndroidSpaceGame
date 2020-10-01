@@ -8,6 +8,7 @@ import com.example.assignmentseven.R;
 // Laser is the main class for the laser in the game
 class Laser extends DynamicSprite {
 
+
     // Make the radius for a laser static - never have a need to change
     private static float radius = 15;
 
