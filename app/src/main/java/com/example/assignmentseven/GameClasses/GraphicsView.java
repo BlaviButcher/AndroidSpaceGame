@@ -11,7 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.assignmentseven.R;
-
+// TODO: Get laser spawning from ships coords
+// TODO: Make laser draw behind ship
 
 // Graphics view class
 public class GraphicsView extends View {
