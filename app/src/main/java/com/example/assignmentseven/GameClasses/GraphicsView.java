@@ -33,6 +33,7 @@ public class GraphicsView extends View {
 
     private Asteroid[] asteroids;
     private Planet planet;
+    private Spaceship spaceship;
 
     public int score = 0;
     public int lives = 3;
@@ -58,6 +59,7 @@ public class GraphicsView extends View {
         }
 
         planet = new Planet(this, 200);
+        spaceship = new Spaceship(this, 100);
     }
 
 
@@ -81,6 +83,7 @@ public class GraphicsView extends View {
 
 
         planet.draw(canvas);
+        spaceship.draw(canvas);
         // TODO: break into individual methods
 
         if (laser != null){
@@ -121,12 +124,6 @@ public class GraphicsView extends View {
         {
             gameOver();
         }
-
-
-
-
-
-
 
         invalidate();
     }
