@@ -28,6 +28,7 @@ abstract class Sprite {
 
     // collidesWith is true when the sprites hit-boxes overlap, otherwise false
     public boolean collidesWith(Sprite other){
+        if (this == null || other == null) return false;
         return (Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)) < this.radius + other.radius);
     }
 

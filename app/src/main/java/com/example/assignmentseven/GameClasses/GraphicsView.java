@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.assignmentseven.R;
-
+// TODO: Get laser spawning from ships coords
+// TODO: Make laser draw behind ship
 
 // Graphics view class
 public class GraphicsView extends View {
@@ -31,6 +33,11 @@ public class GraphicsView extends View {
 
 
     private Asteroid[] asteroids;
+    private Planet planet;
+    private Spaceship spaceship;
+
+    public int score = 0;
+    public int lives = 3;
 
 
 
@@ -51,6 +58,9 @@ public class GraphicsView extends View {
         {
             asteroids[i] = new Asteroid(this, 50);
         }
+
+        planet = new Planet(this, 200);
+        spaceship = new Spaceship(this, 100);
     }
 
 
@@ -72,33 +82,67 @@ public class GraphicsView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+
+        planet.draw(canvas);
+        spaceship.draw(canvas);
         // TODO: break into individual methods
 
         if (laser != null){
             laser.move();
             laser.draw(canvas);
             if (laser.outOfBounds()) // Check the laser is still in bounds
+            {
                 laser = null;
+                lives--;
+            }
+
         }
 
         for (Asteroid asteroid : asteroids)
         {
-            if (asteroid != null)
+            asteroid.move();
+            asteroid.draw(canvas);
+            if (asteroid.outOfBounds(this))
             {
-                asteroid.move();
-                asteroid.draw(canvas);
-                if (asteroid.outOfBounds(this))
-                {
-                    asteroid.respawn(this);
-                }
+                asteroid.respawn(this);
+            }
+            if (asteroid.collidesWith(laser))
+            {
+                asteroid.respawn(this);
+                laser = null;
+                lives--;
             }
         }
 
+        if (planet.collidesWith(laser))
+        {
+            planet.respawn();
+            laser = null;
+            increaseScore(canvas);
+        }
+
+        if(lives <= 0)
+        {
+            gameOver();
+        }
 
         invalidate();
     }
+    private void increaseScore(Canvas canvas)
+    {
+       //score++;
+        //canvas.drawText();
 
+    }
 
+    private void gameOver()
+    {
+        // Read in highscores
+        // compare
+        // Update accordingly
+
+        // Game over screen
+    }
     // Tracks the size of the screen
     @Override
     protected void onSizeChanged(int w, int h, int oldW, int oldH) {
