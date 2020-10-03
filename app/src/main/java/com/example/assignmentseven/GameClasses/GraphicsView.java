@@ -46,6 +46,8 @@ public class GraphicsView extends View {
 
     private int numAsteroids = 3;
 
+    private boolean gameIsOver = false;
+
 
 
     public GraphicsView(Context context) {
@@ -133,8 +135,13 @@ public class GraphicsView extends View {
             increaseScore(canvas);
         }
 
-        if(lives <= 0)
+
+        if(lives <= 0 && !gameIsOver)
         {
+            gameIsOver = true;
+            /* Because the draw method is called so quickly ~.0500 milliseconds apart
+            This would be called again before the activity is properly closed
+            This caused the 5 highscores to always be the same */
             gameOver();
         }
 
@@ -156,6 +163,7 @@ public class GraphicsView extends View {
 
     private void gameOver()
     {
+
         Log.d("blavi", "here");
         // Read in high scores
         int[] scores = HighScoreActivity.getHighScores(getContext());
