@@ -8,6 +8,8 @@ import com.example.assignmentseven.R;
 // Laser is the main class for the laser in the game
 class Laser extends DynamicSprite {
 
+    private static float MIN_VELOCITY = 5;
+    private static float MAX_VELOCITY = 15;
 
     // Make the radius for a laser static - never have a need to change
     private static float radius = 15;
@@ -43,4 +45,19 @@ class Laser extends DynamicSprite {
                 this.x < 0 ||
                 this.y < 0;
     }
+
+
+    @Override
+    public void setVelocity(float dx, float dy) {
+        float mag = (float) Math.sqrt(dx * dx + dy * dy);
+        if (mag < MIN_VELOCITY){
+            dx = dx / mag * MIN_VELOCITY;
+            dy = dy / mag * MIN_VELOCITY;
+        } else if (mag > MAX_VELOCITY){
+            dx = dx / mag * MAX_VELOCITY;
+            dy = dy / mag * MAX_VELOCITY;
+        }
+        super.setVelocity(dx, dy);
+    }
+
 }
