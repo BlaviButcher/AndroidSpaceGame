@@ -27,7 +27,7 @@
 
     <ListView
         android:id="@+id/lv_highscores"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="183dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,18 +36,21 @@
 
     </ListView>
 
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
 
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="250dp"
+
+        android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:background="@drawable/button_state_home"
         android:fontFamily="@font/quantico"
-        android:textColor="@color/colorOrangeYellowCrayola"
 
         android:onClick="onClickHighScoreBackButton"
 
         android:text="@string/highscore_button_back"
+        android:textColor="@color/colorOrangeYellowCrayola"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

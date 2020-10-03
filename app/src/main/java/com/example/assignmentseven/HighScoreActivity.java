@@ -1,5 +1,6 @@
 package com.example.assignmentseven;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -70,23 +72,40 @@ public class HighScoreActivity extends AppCompatActivity
         }
 
         // Set into list view
-        CustomAdaptor arrayAdapter = new CustomAdaptor(this, formattedScores);
+        CustomAdaptor arrayAdapter = new CustomAdaptor(this, R.layout.highscore_adaptor, formattedScores);
         ListView highScoreListView = (ListView) findViewById(R.id.lv_highscores);
         highScoreListView.setAdapter(arrayAdapter);
+
+
     }
 
 
     public class CustomAdaptor extends ArrayAdapter<String> {
 
-        public CustomAdaptor(Context context, String[] items) {
-            super(context,  r.layout,items);
+
+        int resource;
+        private Context context;
+
+        public CustomAdaptor(Context context, int resID, String[] items) {
+            super(context,resID, items);
+            this.resource = resID;
+            this.context = context;
         }
+
+
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = super.getView(position, convertView, parent);
-            ((TextView) v).setTextColor(Color.WHITE);
-            return v;
+
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(resource, parent, false);
+
+            TextView item = (TextView) convertView.findViewById(R.id.tv_1);
+            item.setText(getItem(position));
+
+
+
+            return convertView;
         }
     }
 
