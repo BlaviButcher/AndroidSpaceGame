@@ -26,7 +26,7 @@
 
 
     <ListView
-        android:id="@+id/highscores"
+        android:id="@+id/lv_highscores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="183dp"

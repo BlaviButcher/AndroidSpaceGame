@@ -1,6 +1,7 @@
 package com.example.assignmentseven.GameClasses;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -155,8 +156,9 @@ public class GraphicsView extends View {
 
     private void gameOver()
     {
+        Log.d("blavi", "here");
         // Read in high scores
-        int[] scores = HighScoreActivity.getHighScores(this.getContext());
+        int[] scores = HighScoreActivity.getHighScores(getContext());
         if (score > scores[scores.length-1]){
             // Get index where score should be
             int i;
@@ -164,12 +166,15 @@ public class GraphicsView extends View {
                 if (score <= scores[i])
                     break;
             }
+            Log.d("blavi", "" + i);
+            if (i < 0) i = 0;
             // Shift all previous scores and set this high score
             for (int j = scores.length - 1; j > i; j--)
                 scores[j] = scores[j - 1];
             scores[i] = score;
             HighScoreActivity.setHighScores(scores, this.getContext());
         }
+        ((Activity)getContext()).finish();
     }
 
 
