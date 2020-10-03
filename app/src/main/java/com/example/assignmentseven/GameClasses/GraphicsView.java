@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.assignmentseven.HighScoreActivity;
 import com.example.assignmentseven.R;
 
 import java.util.Random;
@@ -154,12 +155,24 @@ public class GraphicsView extends View {
 
     private void gameOver()
     {
-        // Read in highscores
-        // compare
-        // Update accordingly
-
-        // Game over screen
+        // Read in high scores
+        int[] scores = HighScoreActivity.getHighScores(this.getContext());
+        if (score > scores[scores.length-1]){
+            // Get index where score should be
+            int i;
+            for (i = scores.length - 2; i >= 0; i--){
+                if (score <= scores[i])
+                    break;
+            }
+            // Shift all previous scores and set this high score
+            for (int j = scores.length - 1; j > i; j--)
+                scores[j] = scores[j - 1];
+            scores[i] = score;
+            HighScoreActivity.setHighScores(scores, this.getContext());
+        }
     }
+
+
     // Tracks the size of the screen
     @Override
     protected void onSizeChanged(int w, int h, int oldW, int oldH) {
