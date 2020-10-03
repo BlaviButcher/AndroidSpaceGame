@@ -164,22 +164,18 @@ public class GraphicsView extends View {
     private void gameOver()
     {
 
-        Log.d("blavi", "here");
+
         // Read in high scores
         int[] scores = HighScoreActivity.getHighScores(getContext());
         if (score > scores[scores.length-1]){
-            // Get index where score should be
-            int i;
-            for (i = scores.length - 2; i >= 0; i--){
-                if (score <= scores[i])
+            scores[scores.length-1] = score;
+            for (int i = scores.length - 2; i >= 0; i--){
+                if (score > scores[i]){
+                    scores[i + 1] = scores[i];
+                    scores[i] = score;
+                } else
                     break;
             }
-            Log.d("blavi", "" + i);
-            if (i < 0) i = 0;
-            // Shift all previous scores and set this high score
-            for (int j = scores.length - 1; j > i; j--)
-                scores[j] = scores[j - 1];
-            scores[i] = score;
             HighScoreActivity.setHighScores(scores, this.getContext());
         }
         ((Activity)getContext()).finish();

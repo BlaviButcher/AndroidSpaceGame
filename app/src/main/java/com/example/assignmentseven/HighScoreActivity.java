@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -58,32 +61,45 @@ public class HighScoreActivity extends AppCompatActivity
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        int[] highscoresArray = getHighScores(getApplicationContext());
-
-        String[] highscoreStringArray = new String[highscoresArray.length];
-        for (int i = 0; i < highscoreStringArray.length; i++)
-        {
-            highscoreStringArray[i] = "" + highscoresArray[i];
+        // Get high scores
+        int[] scores = getHighScores(getApplicationContext());
+        String[] formattedScores = new String[scores.length];
+        for (int i = 0; i < formattedScores.length; i++) {
+            formattedScores[i] = "" + scores[i];
+            Log.d("blavi", i + "  -  " + formattedScores[i]);
         }
 
-        Log.d("blavi", 1 + highscoreStringArray[0]);
-        Log.d("blavi", 2 + highscoreStringArray[1]);
-        Log.d("blavi", 3 + highscoreStringArray[2]);
-        Log.d("blavi", 4 + highscoreStringArray[3]);
-        Log.d("blavi", 5 + highscoreStringArray[4]);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, highscoreStringArray);
+        // Set into list view
+        CustomAdaptor arrayAdapter = new CustomAdaptor(this, formattedScores);
         ListView highScoreListView = (ListView) findViewById(R.id.lv_highscores);
         highScoreListView.setAdapter(arrayAdapter);
     }
 
-    protected void onResume()
+
+    public class CustomAdaptor extends ArrayAdapter<String> {
+
+        public CustomAdaptor(Context context, String[] items) {
+            super(context,  r.layout,items);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v = super.getView(position, convertView, parent);
+            ((TextView) v).setTextColor(Color.WHITE);
+            return v;
+        }
+    }
+
+
+        protected void onResume()
     {
         super.onResume();
 
+        // NOTE: On some displays it bugs out with a white bar
+        // this fixes that issue
+        // TODO: find a cleaner solution
         // Hide actionbar
         getSupportActionBar().hide();
-
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
