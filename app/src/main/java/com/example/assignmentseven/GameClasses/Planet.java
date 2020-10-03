@@ -29,6 +29,7 @@ public class Planet extends Sprite
         respawn();
     }
 
+
     @Override
     public void draw(Canvas canvas)
     {
@@ -37,9 +38,11 @@ public class Planet extends Sprite
 
     public void respawn()
     {
-        Random rand = new Random();
+        int x_rightBound = screen.width;
+
         int y_lowerBound = (int) (screen.height * LOWER_DIVIDEND);
-        x = rand.nextInt(screen.width - (int)radius * 2) + radius;
-        y = rand.nextInt(y_lowerBound - (int)radius * 2) + radius;
+        x = screen.rand.nextInt(screen.width - (int)radius * 2) + radius;
+        y = screen.rand.nextInt(y_lowerBound - (int)radius * 2) + radius;
+
     }
 }

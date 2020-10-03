@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.assignmentseven.R;
+
+import java.util.Random;
 // TODO: Get laser spawning from ships coords
 // TODO: Make laser draw behind ship
 
@@ -19,6 +21,7 @@ public class GraphicsView extends View {
 
     // Dimensions of activity bounds
     public int width, height;
+    Random rand;
 
     // Gesture detector
     private GestureDetector gestureDetector;
@@ -45,6 +48,7 @@ public class GraphicsView extends View {
 
     public GraphicsView(Context context) {
         super(context);
+        rand = new Random();
 
         // Get initial width and height - just using screen size..
         width = context.getResources().getDisplayMetrics().widthPixels;
@@ -63,6 +67,7 @@ public class GraphicsView extends View {
 
         planet = new Planet(this, (float) (height * 0.07));
         spaceship = new Spaceship(this, (float) (height * 0.02));
+
     }
 
 
@@ -98,13 +103,13 @@ public class GraphicsView extends View {
         {
             asteroid.move();
             asteroid.draw(canvas);
-            if (asteroid.outOfBounds(this))
+            if (asteroid.outOfBounds())
             {
-                asteroid.respawn(this);
+                asteroid.respawn();
             }
             if (asteroid.collidesWith(laser))
             {
-                asteroid.respawn(this);
+                asteroid.respawn();
                 laser = null;
                 lives--;
             }
