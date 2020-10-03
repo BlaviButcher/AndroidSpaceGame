@@ -95,8 +95,7 @@ public class GraphicsView extends View {
 
 
         // TODO: break into individual methods
-        canvas.drawText("Score: " + score, 20, this.height - 20, paintText);
-        canvas.drawText("Lives: " + lives, width - 220, this.height - 20, paintText);
+        drawText(canvas);
 
 
         if (laser != null){
@@ -141,6 +140,12 @@ public class GraphicsView extends View {
         planet.draw(canvas);
 
         invalidate();
+    }
+
+    private void drawText(Canvas canvas)
+    {
+        canvas.drawText("Score: " + score, 30, this.height - 30, paintText);
+        canvas.drawText("Lives: " + lives, width - 230, this.height - 30, paintText);
     }
     private void increaseScore(Canvas canvas)
     {
