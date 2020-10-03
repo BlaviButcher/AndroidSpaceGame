@@ -39,6 +39,8 @@ public class GraphicsView extends View {
     public int score = 0;
     public int lives = 3;
 
+    private int numAsteroids = 3;
+
 
 
     public GraphicsView(Context context) {
@@ -53,14 +55,14 @@ public class GraphicsView extends View {
 
 
         // Create asteroids
-        asteroids = new Asteroid[3];
-        for (int i = 0; i < 3; i ++)
+        asteroids = new Asteroid[numAsteroids];
+        for (int i = 0; i < numAsteroids; i ++)
         {
-            asteroids[i] = new Asteroid(this, 50);
+            asteroids[i] = new Asteroid(this, (float) (height * 0.02));
         }
 
-        planet = new Planet(this, 200);
-        spaceship = new Spaceship(this, 100);
+        planet = new Planet(this, (float) (height * 0.07));
+        spaceship = new Spaceship(this, (float) (height * 0.02));
     }
 
 
@@ -69,8 +71,6 @@ public class GraphicsView extends View {
         // Don't add a new laser if one already exists
         if (laser != null)
             return;
-
-        Log.i("LASER", "laser added");
 
         laser = new Laser(this);
         laser.setVelocity(dx,dy);
@@ -82,9 +82,6 @@ public class GraphicsView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-
-        planet.draw(canvas);
-        spaceship.draw(canvas);
         // TODO: break into individual methods
 
         if (laser != null){
@@ -95,7 +92,6 @@ public class GraphicsView extends View {
                 laser = null;
                 lives--;
             }
-
         }
 
         for (Asteroid asteroid : asteroids)
@@ -125,6 +121,9 @@ public class GraphicsView extends View {
         {
             gameOver();
         }
+
+        spaceship.draw(canvas);
+        planet.draw(canvas);
 
         invalidate();
     }
