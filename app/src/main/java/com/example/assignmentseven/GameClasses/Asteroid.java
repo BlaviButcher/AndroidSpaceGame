@@ -25,36 +25,37 @@ class Asteroid extends DynamicSprite {
     // which side of screen object spawned
     private boolean spawnedLeft;
 
+
     // Constructors
     public Asteroid(GraphicsView screen, float radius){
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.colorMiddleRed));
-        respawn(screen);
+        respawn();
     }
     public Asteroid(GraphicsView screen, float radius, int colorId){
         super(screen, 0, 0, radius);
-        this.paint.setColor(getColor(colorId));
-        respawn(screen);
+        respawn();
     }
 
 
     // draws to the screen
     public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
 
-    public void respawn(GraphicsView screen)
+
+
+    public void respawn()
     {
         // TODO: Maybe break this method up
-        Random rand = new Random();
         // Create a 50/50 of spawning left or right of screen
 
-        spawnedLeft = rand.nextBoolean();
+        spawnedLeft = screen.rand.nextBoolean();
         // Set variables according to which side spawn
         if (spawnedLeft)
         {
             // set spawn point
             x = -radius;
             // set random velocity
-            int rand_dx = rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
+            int rand_dx = screen.rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
             this.setVelocity(rand_dx, 0);
         }
         else
@@ -63,7 +64,7 @@ class Asteroid extends DynamicSprite {
             x = screen.width + radius;
 
             // Set random velocity within bounds
-            int rand_dx = rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
+            int rand_dx = screen.rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
             // invert
             rand_dx *= -1;
             this.setVelocity(rand_dx,0);
@@ -75,12 +76,12 @@ class Asteroid extends DynamicSprite {
         int lowerBound = (int) (screen.height * LOWER_DIVIDEND);
 
         // Get random spawn location between bounds
-        y = rand.nextInt(lowerBound - upperBound) + upperBound;
+        y = screen.rand.nextInt(lowerBound - upperBound) + upperBound;
 
     }
 
     // Check whether object is out of bounds depending on which side it spawned ie velocity
-    public boolean outOfBounds(GraphicsView screen)
+    public boolean outOfBounds()
     {
         if (spawnedLeft)
         {
