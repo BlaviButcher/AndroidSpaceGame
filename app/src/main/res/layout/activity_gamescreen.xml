@@ -8,25 +8,4 @@
     android:id="@+id/cl_gamescreen">
 
 
-    <TextView
-        android:id="@+id/tv_lives"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lives: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/colorFloralWhite"/>
-
-    <TextView
-        android:id="@+id/tv_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gamescreen_score"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="40dp"
-        android:textColor="@color/colorFloralWhite"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
