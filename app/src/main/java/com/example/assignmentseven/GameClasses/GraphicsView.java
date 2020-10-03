@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.assignmentseven.R;
 
@@ -29,11 +28,12 @@ public class GraphicsView extends View {
     // This is the scaler that we will reduce the fling variables by
     private static float flingDampener = 500;
 
+    Paint paintText;
+
 
     // Only allow one laser to be active at a time - so have a single variable instead of array
     // If laser is null will not draw anything
     private Laser laser = null;
-
 
     private Asteroid[] asteroids;
     private Planet planet;
@@ -49,6 +49,10 @@ public class GraphicsView extends View {
     public GraphicsView(Context context) {
         super(context);
         rand = new Random();
+
+        paintText = new Paint();
+        paintText.setColor(getResources().getColor(R.color.colorFloralWhite));
+        paintText.setTextSize(60);
 
         // Get initial width and height - just using screen size..
         width = context.getResources().getDisplayMetrics().widthPixels;
@@ -67,6 +71,7 @@ public class GraphicsView extends View {
 
         planet = new Planet(this, (float) (height * 0.07));
         spaceship = new Spaceship(this, (float) (height * 0.02));
+
 
     }
 
@@ -87,7 +92,12 @@ public class GraphicsView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+
+
         // TODO: break into individual methods
+        canvas.drawText("Score: " + score, 20, this.height - 20, paintText);
+        canvas.drawText("Lives: " + lives, width - 220, this.height - 20, paintText);
+
 
         if (laser != null){
             laser.move();
@@ -134,9 +144,7 @@ public class GraphicsView extends View {
     }
     private void increaseScore(Canvas canvas)
     {
-       //score++;
-        //canvas.drawText();
-
+       score++;
     }
 
     private void gameOver()
@@ -154,8 +162,6 @@ public class GraphicsView extends View {
         width = w;
         height = h;
     }
-
-
 
     // For the gesture detection
     @Override
