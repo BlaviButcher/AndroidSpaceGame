@@ -27,4 +27,7 @@ abstract class DynamicSprite extends Sprite {
     public void move() {
         pos.add(velocity);
     }
+
+    // true if sprite is out of bounds, false otherwise
+    public abstract boolean outOfBounds();
 }
