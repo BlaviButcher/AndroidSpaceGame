@@ -177,6 +177,7 @@ public class GraphicsView extends View {
                         break;
 
                     case GasGiant:
+                        ((GasGiant) b).pull((Laser) a);
                         break;
 
                     case Planet:
@@ -197,6 +198,7 @@ public class GraphicsView extends View {
                         break;
 
                     case GasGiant:
+                        ((GasGiant) b).pull((Asteroid) a);
                         break;
 
                     case Planet:

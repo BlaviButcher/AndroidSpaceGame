@@ -10,6 +10,9 @@ public class Vector {
     public Vector(double x, double y){
         this.x = x; this.y = y;
     }
+    public Vector(Point a, Point b){
+        x = b.x - a.x; y = b.y - a.y;
+    }
 
     // Returns the magnitude of the vector
     public double mag(){

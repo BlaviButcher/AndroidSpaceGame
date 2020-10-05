@@ -8,7 +8,7 @@ import com.example.assignmentseven.GameUtils.Point;
 abstract class Sprite {
 
     // Position of the sprite
-    protected Point pos;
+    public Point pos;
 
     // Radius of the sprite hit box
     protected int radius;

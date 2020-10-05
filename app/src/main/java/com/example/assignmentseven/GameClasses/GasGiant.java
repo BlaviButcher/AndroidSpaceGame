@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 
+import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.R;
 
 public class GasGiant extends Sprite {
@@ -34,5 +35,13 @@ public class GasGiant extends Sprite {
     {
         pos.x = screen.randIntInRange(radius, screen.width-radius);
         pos.y = screen.randIntInRange((int) (screen.height * UPPER_DIVIDEND), (int)(screen.height * LOWER_DIVIDEND));
+    }
+
+    // pull gets the distance between itself and another sprite and
+    public void pull(DynamicSprite other){
+        Vector change = new Vector(other.pos, pos);
+//        change.scale(1 / Math.pow(change.mag(), 2));
+        change.scale(1 / change.mag());
+        other.velocity.add(change);
     }
 }
