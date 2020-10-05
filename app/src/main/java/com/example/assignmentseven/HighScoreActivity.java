@@ -75,8 +75,6 @@ public class HighScoreActivity extends AppCompatActivity
         CustomAdaptor arrayAdapter = new CustomAdaptor(this, R.layout.highscore_adaptor, formattedScores);
         ListView highScoreListView = (ListView) findViewById(R.id.lv_highscores);
         highScoreListView.setAdapter(arrayAdapter);
-
-
     }
 
 

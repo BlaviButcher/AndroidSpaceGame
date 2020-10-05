@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.HighScoreActivity;
 import com.example.assignmentseven.R;
 
@@ -28,7 +29,7 @@ public class GraphicsView extends View {
     private GestureDetector gestureDetector;
 
     // This is the scaler that we will reduce the fling variables by
-    private static float flingDampener = 500;
+    private static double flingDampener = 500;
 
     Paint paintText;
 
@@ -70,24 +71,18 @@ public class GraphicsView extends View {
         asteroids = new Asteroid[numAsteroids];
         for (int i = 0; i < numAsteroids; i ++)
         {
-            asteroids[i] = new Asteroid(this, (float) (height * 0.02));
+            asteroids[i] = new Asteroid(this, (int)(height * 0.02));
         }
 
-        planet = new Planet(this, (float) (height * 0.07));
-        spaceship = new Spaceship(this, (float) (height * 0.02));
-
-
+        planet = new Planet(this, (int)(height * 0.07));
+        spaceship = new Spaceship(this, (int) (height * 0.02));
+        laser = new Laser(this);
     }
 
 
     // newLaser will launch a laser to the screen
-    protected void newLaser(float dx, float dy){
-        // Don't add a new laser if one already exists
-        if (laser != null)
-            return;
-
-        laser = new Laser(this);
-        laser.setVelocity(dx,dy);
+    protected void newLaser(double dx, double dy){
+        laser.shoot(new Vector(dx,dy));
     }
 
 
@@ -102,14 +97,12 @@ public class GraphicsView extends View {
         drawText(canvas);
 
 
-        if (laser != null){
-            laser.move();
-            laser.draw(canvas);
-            if (laser.outOfBounds()) // Check the laser is still in bounds
-            {
-                laser = null;
-                lives--;
-            }
+        laser.move();
+        laser.draw(canvas);
+        if (laser.outOfBounds()) // Check the laser is still in bounds
+        {
+            lives--;
+            laser.hide();
         }
 
         for (Asteroid asteroid : asteroids)
@@ -123,7 +116,7 @@ public class GraphicsView extends View {
             if (asteroid.collidesWith(laser))
             {
                 asteroid.respawn();
-                laser = null;
+                laser.hide();
                 lives--;
             }
         }
@@ -131,7 +124,7 @@ public class GraphicsView extends View {
         if (planet.collidesWith(laser))
         {
             planet.respawn();
-            laser = null;
+            laser.hide();
             increaseScore(canvas);
         }
 
@@ -163,8 +156,6 @@ public class GraphicsView extends View {
 
     private void gameOver()
     {
-
-
         // Read in high scores
         int[] scores = HighScoreActivity.getHighScores(getContext());
         if (score > scores[scores.length-1]){
@@ -217,5 +208,14 @@ public class GraphicsView extends View {
         }
     }
 
+
+    // Helper functions
+    public double randDoubleInRange(double min, double max){
+        return rand.nextDouble() * (max - min) + min;
+    }
+
+    public int randIntInRange(int min, int max){
+        return rand.nextInt(max - min) + min;
+    }
 
 }
