@@ -2,6 +2,7 @@ package com.example.assignmentseven.GameClasses;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.example.assignmentseven.R;
 
@@ -21,6 +22,7 @@ public class GasGiant extends Sprite {
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.color_gas_giant));
         this.planetRadius = planetRadius;
+        respawn();
     }
 
     // draws to the screen
@@ -31,6 +33,6 @@ public class GasGiant extends Sprite {
     public void respawn()
     {
         pos.x = screen.randIntInRange(radius, screen.width-radius);
-        pos.y = screen.randIntInRange((int) (screen.height * LOWER_DIVIDEND), (int)(screen.height * UPPER_DIVIDEND));
+        pos.y = screen.randIntInRange((int) (screen.height * UPPER_DIVIDEND), (int)(screen.height * LOWER_DIVIDEND));
     }
 }
