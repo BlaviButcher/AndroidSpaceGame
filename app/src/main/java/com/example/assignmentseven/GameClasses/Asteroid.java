@@ -43,7 +43,16 @@ class Asteroid extends DynamicSprite {
     public void draw(Canvas canvas){ canvas.drawCircle(pos.x,pos.y, radius, paint); }
 
 
+    // override move method
+    @Override
+    public void move() {
+        if (outOfBounds())
+            respawn();
+        else
+            super.move();
+    }
 
+    // respawns the asteroid
     public void respawn()
     {
         // Decided if the asteroid spawns on the left or right
@@ -64,6 +73,7 @@ class Asteroid extends DynamicSprite {
         // Get random spawn location between bounds
         pos.y = (int) screen.randDoubleInRange(screen.height * LOWER_DIVIDEND, screen.height * UPPER_DIVIDEND);
     }
+
 
     // Check whether object is out of bounds depending on which side it spawned ie velocity
     public boolean outOfBounds()

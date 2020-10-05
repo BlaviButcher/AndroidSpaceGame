@@ -31,6 +31,18 @@ class Laser extends DynamicSprite {
     // draws to the screen
     public void draw(Canvas canvas){ canvas.drawCircle(pos.x, pos.y, radius, paint); }
 
+
+    // override move method to handle outOfBounds
+    @Override
+    public void move() {
+        if (outOfBounds()){
+            hide();
+            screen.lives--;
+        } else {
+            super.move();
+        }
+    }
+
     // Hides the laser
     public void hide(){
         pos.x = -radius;

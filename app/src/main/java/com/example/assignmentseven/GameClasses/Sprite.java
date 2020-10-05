@@ -37,6 +37,8 @@ abstract class Sprite {
         return pos.distanceTo(other.pos) < radius + other.radius;
     }
 
+
+
     // getColor implementation for these objects
     protected int getColor(int colorId){
         return ContextCompat.getColor(this.screen.getContext(), colorId);

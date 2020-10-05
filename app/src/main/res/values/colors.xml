@@ -8,4 +8,6 @@
     <color name="colorMiddleRed">#DB7F67</color>
     <color name="colorDarkRed">#8C1C13</color>
     <color name="colorFloralWhite">#FFF8F0</color>
+
+    <color name="color_gas_giant">#77777777</color>
 </resources>
