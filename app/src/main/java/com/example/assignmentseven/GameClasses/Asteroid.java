@@ -19,77 +19,57 @@ class Asteroid extends DynamicSprite {
     final double UPPER_DIVIDEND = 0.25;
     final double LOWER_DIVIDEND = 0.75;
 
-    final int MAX_VELOCITY = 10;
-    final int MIN_VELOCITY = 5;
+    // Min and max velocity for an asteroid
+    final double MAX_VELOCITY = 8;
+    final double MIN_VELOCITY = 4;
 
     // which side of screen object spawned
     private boolean spawnedLeft;
 
 
     // Constructors
-    public Asteroid(GraphicsView screen, float radius){
+    public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.colorMiddleRed));
         respawn();
     }
-    public Asteroid(GraphicsView screen, float radius, int colorId){
+    public Asteroid(GraphicsView screen, int radius, int colorId){
         super(screen, 0, 0, radius);
         respawn();
     }
 
 
     // draws to the screen
-    public void draw(Canvas canvas){ canvas.drawCircle(x,y, radius, paint); }
+    public void draw(Canvas canvas){ canvas.drawCircle(pos.x,pos.y, radius, paint); }
 
 
 
     public void respawn()
     {
-        // TODO: Maybe break this method up
-        // Create a 50/50 of spawning left or right of screen
-
+        // Decided if the asteroid spawns on the left or right
         spawnedLeft = screen.rand.nextBoolean();
-        // Set variables according to which side spawn
-        if (spawnedLeft)
-        {
-            // set spawn point
-            x = -radius;
-            // set random velocity
-            int rand_dx = screen.rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
-            this.setVelocity(rand_dx, 0);
-        }
-        else
-        {
-            // Set spawn point
-            x = screen.width + radius;
-
-            // Set random velocity within bounds
-            int rand_dx = screen.rand.nextInt(MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
-            // invert
-            rand_dx *= -1;
-            this.setVelocity(rand_dx,0);
+        double xdir = 1;
+        if (spawnedLeft) pos.x = -radius;
+        else {
+            pos.x = screen.width + radius;
+            xdir = -1;
         }
 
-        // Y = 0 is at the top of the screen - idk why... damn programmers
-        // So by upper and lower I mean that in relation to the view of the user
-        int upperBound = (int) (screen.height * UPPER_DIVIDEND);
-        int lowerBound = (int) (screen.height * LOWER_DIVIDEND);
+        // Set random velocity
+        velocity.x = screen.rand.nextDouble() * 2 + 1;
+        velocity.y = screen.rand.nextDouble() - 0.5;
+        velocity.unit().scale(screen.rand.nextDouble() * (MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY);
+        velocity.x *= xdir; // Set x velocity by the side it spawns
 
         // Get random spawn location between bounds
-        y = screen.rand.nextInt(lowerBound - upperBound) + upperBound;
-
+        pos.y = (int) screen.randDoubleInRange(screen.height * LOWER_DIVIDEND, screen.height * UPPER_DIVIDEND);
     }
 
     // Check whether object is out of bounds depending on which side it spawned ie velocity
     public boolean outOfBounds()
     {
-        if (spawnedLeft)
-        {
-            return x > screen.width + radius;
-        }
-
-        return x < -radius;
-
+        if (spawnedLeft) return pos.x > screen.width + radius;
+        return pos.x < -radius;
     }
 
 

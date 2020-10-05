@@ -7,7 +7,6 @@ public class Vector {
     public Vector(){
         x = 0; y = 0;
     }
-
     public Vector(double x, double y){
         this.x = x; this.y = y;
     }
@@ -20,23 +19,32 @@ public class Vector {
     // Returns the new unit vector
     public Vector unit(){
         double m = this.mag();
-        return  new Vector(x/m, y/m);
+        x= x/m; y = y/m;
+        return this;
     }
 
     // adds the other vector to this vector.
-    public void add(Vector other){
+    public Vector add(Vector other){
         x += other.x;
         y += other.y;
+        return this;
     }
 
     // dot product of the two vectors
-    public void dot(Vector other){
+    public Vector dot(Vector other){
         x *= other.x;
         y *= other.y;
+        return this;
     }
 
     // returns a copy of the two vectors
     public Vector copy(){
         return new Vector(x,y);
+    }
+
+    // scales the vector by factor
+    public Vector scale(double factor){
+        x *= factor; y *= factor;
+        return this;
     }
 }

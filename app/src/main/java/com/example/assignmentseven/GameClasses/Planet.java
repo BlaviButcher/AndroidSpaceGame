@@ -15,14 +15,14 @@ public class Planet extends Sprite
     // Need a little space between asteroids and planets - currently 5%
     final double LOWER_DIVIDEND = 0.25;
 
-    public Planet(GraphicsView screen, float radius, int colorID)
+    public Planet(GraphicsView screen, int radius, int colorID)
     {
         super(screen, 0, 0, radius);
         paint.setColor(getColor(colorID));
         respawn();
     }
 
-    public Planet(GraphicsView screen,  float radius)
+    public Planet(GraphicsView screen, int radius)
     {
         super(screen, 0, 0, radius);
         paint.setColor(getColor(R.color.colorDarkPurple));
@@ -33,16 +33,13 @@ public class Planet extends Sprite
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawCircle(x, y, radius, paint);
+        canvas.drawCircle(pos.x, pos.y, radius, paint);
     }
 
     public void respawn()
     {
-        int x_rightBound = screen.width;
-
         int y_lowerBound = (int) (screen.height * LOWER_DIVIDEND);
-        x = screen.rand.nextInt(screen.width - (int)radius * 2) + radius;
-        y = screen.rand.nextInt(y_lowerBound - (int)radius * 2) + radius;
-
+        pos.x = screen.rand.nextInt(screen.width - radius * 2) + radius;
+        pos.y = screen.rand.nextInt(y_lowerBound - radius * 2) + radius;
     }
 }

@@ -9,12 +9,12 @@ public class Spaceship extends Sprite
 {
     public Paint paint = new Paint();
 
-    public Spaceship(GraphicsView screen, float radius, int colorID)
+    public Spaceship(GraphicsView screen, int radius, int colorID)
     {
         super(screen, screen.width / 2, screen.height - 100, radius);
     }
 
-    public Spaceship(GraphicsView screen, float radius)
+    public Spaceship(GraphicsView screen, int radius)
     {
         super(screen, screen.width / 2, screen.height - 100, radius);
         paint.setColor(getColor(R.color.colorFloralWhite));
@@ -23,6 +23,6 @@ public class Spaceship extends Sprite
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawCircle(x, y, radius, paint);
+        canvas.drawCircle(pos.x, pos.y, radius, paint);
     }
 }

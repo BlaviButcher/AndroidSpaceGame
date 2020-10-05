@@ -1,32 +1,30 @@
 package com.example.assignmentseven.GameClasses;
 
 import com.example.assignmentseven.GameClasses.Sprite;
+import com.example.assignmentseven.GameUtils.Point;
+import com.example.assignmentseven.GameUtils.Vector;
 
 // DynamicSprite is a sprite that can move
 abstract class DynamicSprite extends Sprite {
 
     // The speed that this object can move
-    protected float dx,dy;
+    protected Vector velocity = new Vector();
 
-    public DynamicSprite(GraphicsView screen, float x, float y, float radius){
+    public DynamicSprite(GraphicsView screen, int x, int y, int radius){
         super(screen, x, y, radius);
+    }
+    public DynamicSprite(GraphicsView screen, Point pos, int radius){
+        super(screen, pos, radius);
     }
 
 
     // Sets the velocity variables for a DynamicSprite
-    public void setVelocity(float dx, float dy){
-        this.dx = dx; this.dy = dy;
+    public void setVelocity(Vector v){
+        velocity = v;
     }
 
     // move will move the sprite by dx * velocity, dy * velocity
     public void move() {
-        this.x += this.dx;
-        this.y += this.dy;
-
-//            // check constraints
-//            if (this.x > width - this.radius) this.x = width - (int) this.radius;
-//            if (this.x < this.radius) this.x = (int) this.radius;
-//            if (this.y > height - this.radius) this.y = height - (int) this.radius;
-//            if (this.y < this.radius) this.y = (int) this.radius;
+        pos.add(velocity);
     }
 }
