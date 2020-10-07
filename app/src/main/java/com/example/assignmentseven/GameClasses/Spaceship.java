@@ -17,7 +17,7 @@ public class Spaceship extends Sprite
     public Spaceship(GraphicsView screen, int radius)
     {
         super(screen, screen.width / 2, screen.height - 100, radius);
-        paint.setColor(getColor(R.color.colorFloralWhite));
+        paint.setColor(getColor(R.color.color_floral_white));
     }
 
     @Override

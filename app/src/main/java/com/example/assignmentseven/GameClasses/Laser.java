@@ -7,6 +7,8 @@ import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.GameUtils.Point;
 import com.example.assignmentseven.R;
 
+
+// TODO: Laser respawns if you swipe again while laser is travelling
 // Laser is the main class for the laser in the game
 class Laser extends DynamicSprite {
 
@@ -24,7 +26,7 @@ class Laser extends DynamicSprite {
     // Constructors
     public Laser(GraphicsView screen){
         super(screen, 0, -radius, radius);
-        this.paint.setColor(getColor(R.color.colorOrangeYellowCrayola));
+        this.paint.setColor(getColor(R.color.color_orange_yellow_crayola));
     }
 
 

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBlack">#000000</color>
-    <color name="colorOrangeYellowCrayola">#F4D06F</color>
-    <color name="colorPurple">#6200B3</color>
-    <color name="colorDarkPurple">#310059</color>
+    <color name="color_black">#000000</color>
+    <color name="color_orange_yellow_crayola">#F4D06F</color>
+    <color name="color_purple">#6200B3</color>
+    <color name="color_dark_purple">#310059</color>
 
-    <color name="colorMiddleRed">#DB7F67</color>
-    <color name="colorDarkRed">#8C1C13</color>
-    <color name="colorFloralWhite">#FFF8F0</color>
+    <color name="color_middle_red">#DB7F67</color>
+    <color name="color_dark_red">#8C1C13</color>
+    <color name="color_floral_white">#FFF8F0</color>
+    <color name="color_test">#C7D3DD</color>
 
     <color name="color_gas_giant">#77777777</color>
 </resources>

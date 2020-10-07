@@ -16,7 +16,7 @@
 
         android:text="@string/highscore_header_text"
         android:textAlignment="center"
-        android:textColor="@color/colorDarkRed"
+        android:textColor="@color/color_dark_red"
         android:textSize="70dp"
         app:layout_constraintBottom_toTopOf="@+id/home_play_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:id="@+id/lv_highscores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="183dp"
+        android:layout_marginTop="110dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
@@ -50,7 +50,7 @@
         android:onClick="onClickHighScoreBackButton"
 
         android:text="@string/highscore_button_back"
-        android:textColor="@color/colorOrangeYellowCrayola"
+        android:textColor="@color/color_orange_yellow_crayola"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

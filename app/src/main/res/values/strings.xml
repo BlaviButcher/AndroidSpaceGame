@@ -8,4 +8,9 @@
     <string name="gamescreen_score">Score: 0</string>
 
 
+    <string name="retry_button_text">Retry</string>
+    <string name="menu_button_text">Menu</string>
+    <string name="game_over_text">Game Over</string>
+
+
 </resources>

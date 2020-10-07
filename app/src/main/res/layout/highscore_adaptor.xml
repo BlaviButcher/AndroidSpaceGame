@@ -6,12 +6,14 @@
     android:orientation="horizontal">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:id="@+id/tv_1"
-        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
         android:gravity="center"
         android:text="tv_1"
-        android:textColor="@color/colorFloralWhite"/>
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/color_floral_white"
+        />
 
 </LinearLayout>

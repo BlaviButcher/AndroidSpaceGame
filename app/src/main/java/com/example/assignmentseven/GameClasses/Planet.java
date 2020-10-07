@@ -5,8 +5,6 @@ import android.graphics.Paint;
 
 import com.example.assignmentseven.R;
 
-import java.util.Random;
-
 // Planet is the 'target' in the game
 public class Planet extends Sprite
 {
@@ -25,7 +23,7 @@ public class Planet extends Sprite
     public Planet(GraphicsView screen, int radius)
     {
         super(screen, 0, 0, radius);
-        paint.setColor(getColor(R.color.colorDarkPurple));
+        paint.setColor(getColor(R.color.color_dark_purple));
         respawn();
     }
 
