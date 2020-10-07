@@ -4,10 +4,10 @@
         <shape
             android:shape="rectangle">
             <corners android:radius="20dp"/>
-            <solid android:color="@color/colorDarkPurple"/>
+            <solid android:color="@color/color_dark_purple"/>
             <stroke
                 android:width="2dp"
-                android:color="@color/colorFloralWhite">
+                android:color="@color/color_floral_white">
             </stroke>
 
         </shape>
@@ -16,10 +16,10 @@
         <shape
             android:shape="rectangle">
             <corners android:radius="20dp"/>
-            <solid android:color="@color/colorPurple"/>
+            <solid android:color="@color/color_purple"/>
             <stroke
                 android:width="2dp"
-                android:color="@color/colorFloralWhite">
+                android:color="@color/color_floral_white">
             </stroke>
         </shape>
     </item>

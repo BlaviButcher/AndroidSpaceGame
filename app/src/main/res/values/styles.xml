@@ -3,9 +3,17 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
 
-        <item name="colorPrimary">@color/colorPurple</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
-        <item name="colorAccent">@color/colorFloralWhite</item>
+        <item name="colorPrimary">@color/color_purple</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <item name="colorAccent">@color/color_floral_white</item>
+    </style>
+    
+    
+    <style name="AppTheme.customTheme" >
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/game_over_window_state</item>
+
+
     </style>
 
 </resources>

@@ -1,5 +1,8 @@
 package com.example.assignmentseven;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -16,6 +19,19 @@ import com.example.assignmentseven.GameClasses.GraphicsView;
 import static java.security.AccessController.getContext;
 
 public class GameActivity extends AppCompatActivity {
+
+    /* Create broadcast receiver so GameActivity can be closed from another activity ie
+       game over popup */
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context arg0, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("finish_activity")) {
+                finish();
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +48,9 @@ public class GameActivity extends AppCompatActivity {
         GraphicsView graphicsView = new GraphicsView(this);
         ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.cl_gamescreen);
         constraintLayout.addView(graphicsView);
+
+        // register broadcast receiver to GameActivity
+        registerReceiver(broadcastReceiver, new IntentFilter("finish_activity"));
     }
 
     protected void onResume()
@@ -46,4 +65,6 @@ public class GameActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
     }
+
+
 }
