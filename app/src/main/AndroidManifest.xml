@@ -12,6 +12,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".GameActivity"/>
         <activity android:name=".HighScoreActivity"/>
+        <activity android:name=".GameOver"
+            android:theme="@style/AppTheme.customTheme">
+        </activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>

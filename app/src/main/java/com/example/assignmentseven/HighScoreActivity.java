@@ -101,8 +101,6 @@ public class HighScoreActivity extends AppCompatActivity
             TextView item = (TextView) convertView.findViewById(R.id.tv_1);
             item.setText(getItem(position));
 
-
-
             return convertView;
         }
     }

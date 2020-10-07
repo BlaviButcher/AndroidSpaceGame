@@ -3,18 +3,20 @@ package com.example.assignmentseven.GameClasses;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.assignmentseven.GameActivity;
+import com.example.assignmentseven.GameOver;
 import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.HighScoreActivity;
+import com.example.assignmentseven.MainActivity;
 import com.example.assignmentseven.R;
 
-import java.lang.reflect.Type;
 import java.util.Random;
 // TODO: Get laser spawning from ships coords
 // TODO: Make laser draw behind ship
@@ -69,7 +71,7 @@ public class GraphicsView extends View {
 
         // Set text paint
         paintText = new Paint();
-        paintText.setColor(getResources().getColor(R.color.colorFloralWhite));
+        paintText.setColor(getResources().getColor(R.color.color_floral_white));
         paintText.setTextSize(60);
 
         // Add custom gesture listener
@@ -138,10 +140,6 @@ public class GraphicsView extends View {
             gameOver();
         }
 
-        spaceship.draw(canvas);
-        planet.draw(canvas);
-
-
         invalidate();
     }
 
@@ -160,6 +158,7 @@ public class GraphicsView extends View {
         // Switch so always ordered
         if (typeA.ordinal() > typeB.ordinal()){
             Classes tmpC = typeA; typeA = typeB; typeB = tmpC;
+            // if types are switch, then sprites are switched to reflect
             Sprite  tmpS = a; a = b; b = tmpS;
         }
 
@@ -277,7 +276,12 @@ public class GraphicsView extends View {
             }
             HighScoreActivity.setHighScores(scores, this.getContext());
         }
-        ((Activity)getContext()).finish();
+        //((Activity)getContext()).finish();
+        Context context = (Activity)getContext();
+        Intent myIntent = new Intent(context, GameOver.class);
+        myIntent.putExtra("SCORES_ARRAY", scores);
+        myIntent.putExtra("SCORE", this.score);
+        context.startActivity(myIntent);
     }
 
 

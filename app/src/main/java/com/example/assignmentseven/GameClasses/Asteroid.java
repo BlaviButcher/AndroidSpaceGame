@@ -2,13 +2,11 @@ package com.example.assignmentseven.GameClasses;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.assignmentseven.R;
 
-import java.util.Random;
+
+// TODO: Asteroids don't respawn when going out of bounds on the y axis
 
 // Asteroid is an obstacle in the game
 class Asteroid extends DynamicSprite {
@@ -30,7 +28,7 @@ class Asteroid extends DynamicSprite {
     // Constructors
     public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
-        this.paint.setColor(getColor(R.color.colorMiddleRed));
+        this.paint.setColor(getColor(R.color.color_middle_red));
         respawn();
     }
     public Asteroid(GraphicsView screen, int radius, int colorId){
