@@ -16,8 +16,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/color_floral_white"
-
-
+        android:textSize="30sp"
         />
 
 </LinearLayout>

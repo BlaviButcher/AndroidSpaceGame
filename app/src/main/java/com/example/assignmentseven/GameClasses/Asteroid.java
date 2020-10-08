@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import com.example.assignmentseven.R;
 
 
-// TODO: Asteroids don't respawn when going out of bounds on the y axis
+
 
 // Asteroid is an obstacle in the game
 class Asteroid extends DynamicSprite {

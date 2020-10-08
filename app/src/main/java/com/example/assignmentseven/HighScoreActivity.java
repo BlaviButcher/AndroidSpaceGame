@@ -22,7 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-// TODO: Make highscore margins relative
+
 public class HighScoreActivity extends AppCompatActivity
 {
     // Constants for storing the high scores
@@ -120,7 +120,6 @@ public class HighScoreActivity extends AppCompatActivity
 
         // NOTE: On some displays it bugs out with a white bar
         // this fixes that issue
-        // TODO: find a cleaner solution
         // Hide actionbar
         getSupportActionBar().hide();
         // Enable fullscreen

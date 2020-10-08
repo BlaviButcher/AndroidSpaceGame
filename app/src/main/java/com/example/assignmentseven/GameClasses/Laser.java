@@ -9,7 +9,7 @@ import com.example.assignmentseven.GameUtils.Point;
 import com.example.assignmentseven.R;
 
 
-// TODO: Laser respawns if you swipe again while laser is travelling
+
 // Laser is the main class for the laser in the game
 class Laser extends DynamicSprite {
 
@@ -19,7 +19,7 @@ class Laser extends DynamicSprite {
     private static int tailLength = 3;
     private Point[] tail;
 
-    private boolean hidden = true;
+    public boolean hidden = true;
 
     // Class constants
 
@@ -80,8 +80,8 @@ class Laser extends DynamicSprite {
     }
 
     // Shoots the laser
-    public void shoot(Vector vel){
-        pos = new Point(screen.width / 2, (int) (screen.height - 3 * radius));
+    public void shoot(Vector vel, Point spaceship){
+        pos = new Point(spaceship.x, (int) (spaceship.y));
         tail = new Point[tailLength];
         for (int i = 0; i < tailLength; i++)
             tail[i] = pos.copy();

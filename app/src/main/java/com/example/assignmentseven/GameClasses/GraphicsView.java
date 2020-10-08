@@ -6,20 +6,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.assignmentseven.GameActivity;
 import com.example.assignmentseven.GameOver;
+import com.example.assignmentseven.GameUtils.Point;
 import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.HighScoreActivity;
 import com.example.assignmentseven.MainActivity;
 import com.example.assignmentseven.R;
 
 import java.util.Random;
-// TODO: Get laser spawning from ships coords
-// TODO: Make laser draw behind ship
+
+
 
 // Graphics view class
 public class GraphicsView extends View {
@@ -297,10 +299,24 @@ public class GraphicsView extends View {
     // For the gesture detection
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event))
-            return true;
+        float x = event.getX();
+        float y = event.getY();
 
-        return super.onTouchEvent(event);
+
+
+
+        //float bounds = height / 3f;
+        //bounds = height - bounds;
+        //Log.d("blavi", ""+ bounds);
+        // Stops multispawning - check if laser is currently flyinng
+        if(laser.hidden)
+        {
+            //if(y < bounds) return false;
+            if (gestureDetector.onTouchEvent(event))
+                return true;
+            //return super.onTouchEvent(event);
+        }
+        return false;
     }
 
     // Gesture listener class - extends SimpleOnGestureListener that returns false for every other event
@@ -312,7 +328,7 @@ public class GraphicsView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            laser.shoot(new Vector(velocityX, velocityY));
+            laser.shoot(new Vector(velocityX, velocityY), spaceship.pos);
             return false;
         }
     }
