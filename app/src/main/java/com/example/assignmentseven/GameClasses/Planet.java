@@ -11,7 +11,7 @@ public class Planet extends Sprite
     public Paint paint = new Paint();
 
     // Need a little space between asteroids and planets - currently 5%
-    final double LOWER_DIVIDEND = 0.25;
+    private final double LOWER_DIVIDEND = 0.25;
 
     public Planet(GraphicsView screen, int radius, int colorID)
     {
