@@ -2,6 +2,7 @@ package com.example.assignmentseven.GameClasses;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.GameUtils.Point;
@@ -12,26 +13,49 @@ import com.example.assignmentseven.R;
 // Laser is the main class for the laser in the game
 class Laser extends DynamicSprite {
 
+    // Laser State
+
+    // tail is the trailing circles for the laser
+    private static int tailLength = 3;
+    private Point[] tail;
+
+    private boolean hidden = true;
+
+    // Class constants
+
     // Min and max velocity for a laser
-    private static double MIN_VELOCITY = 10;
-    private static double MAX_VELOCITY = 18;
+    private static double MIN_VELOCITY = 6;
+    private static double MAX_VELOCITY = 15;
 
     // Make the radius for a laser static - never have a need to change
     private static int radius = 15;
-    private boolean hidden = true;
+    private static int outlineRadius = 23;
 
     // Colour of the laser, may change to some kind of bitmap later
-    public Paint paint = new Paint();
+    public Paint laserPaint = new Paint();
+    public Paint outlinePaint = new Paint();
 
     // Constructors
     public Laser(GraphicsView screen){
-        super(screen, 0, -radius, radius);
-        this.paint.setColor(getColor(R.color.color_orange_yellow_crayola));
+        super(screen, -500, -500, radius);
+        this.laserPaint.setColor(getColor(R.color.color_laser));
+        this.outlinePaint.setColor(getColor(R.color.color_laser_outline));
+
+        tail = new Point[tailLength];
+        for (int i = 0; i < tailLength; i++)
+            tail[i] = pos.copy();
     }
 
 
     // draws to the screen
-    public void draw(Canvas canvas){ canvas.drawCircle(pos.x, pos.y, radius, paint); }
+    public void draw(Canvas canvas){
+        canvas.drawCircle(pos.x, pos.y, outlineRadius, outlinePaint);
+        for (Point p : tail)
+            canvas.drawCircle(p.x, p.y, outlineRadius, outlinePaint);
+
+        for (Point p : tail)
+            canvas.drawCircle(p.x, p.y, radius, laserPaint);
+    }
 
 
     // override move method to handle outOfBounds
@@ -41,20 +65,27 @@ class Laser extends DynamicSprite {
             hide();
             screen.lives--;
         } else {
+            for (int i = tailLength-2; i >= 0; i--)
+                tail[i+1] = tail[i];
+            tail[0] = pos.copy();
             super.move();
         }
     }
 
     // Hides the laser
     public void hide(){
-        pos.x = -radius;
+        pos.x = -500; pos.y = -500;
         velocity = new Vector();
         hidden = true;
     }
 
     // Shoots the laser
     public void shoot(Vector vel){
-        pos = startPoint();
+        pos = new Point(screen.width / 2, (int) (screen.height - 3 * radius));
+        tail = new Point[tailLength];
+        for (int i = 0; i < tailLength; i++)
+            tail[i] = pos.copy();
+
         setVelocity(vel);
         hidden = false;
     }
@@ -83,11 +114,5 @@ class Laser extends DynamicSprite {
         velocity = v;
     }
 
-
-    // Returns the start point for the ball
-    // put in function as we want the start point to change with screen size
-    private Point startPoint(){
-        return new Point(screen.width / 2, (int) (screen.height - 3 * radius));
-    }
 
 }
