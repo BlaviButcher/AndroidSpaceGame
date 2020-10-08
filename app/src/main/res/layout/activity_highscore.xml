@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:id="@+id/tv_highscore_highscore_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -18,11 +19,11 @@
         android:textAlignment="center"
         android:textColor="@color/color_dark_red"
         android:textSize="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/home_play_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 
     <ListView
@@ -31,7 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_highscore_back"
         app:layout_constraintTop_toTopOf="parent"
+
         >
 
     </ListView>
@@ -39,7 +42,7 @@
 
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_highscore_back"
         android:layout_width="250dp"
 
         android:layout_height="wrap_content"
@@ -53,9 +56,9 @@
         android:textColor="@color/color_floral_white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_play_button" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

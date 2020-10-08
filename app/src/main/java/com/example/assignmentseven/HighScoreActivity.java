@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+// TODO: Make highscore margins relative
 public class HighScoreActivity extends AppCompatActivity
 {
     // Constants for storing the high scores
@@ -99,7 +101,13 @@ public class HighScoreActivity extends AppCompatActivity
             convertView = inflater.inflate(resource, parent, false);
 
             TextView item = (TextView) convertView.findViewById(R.id.tv_1);
+
+
+
+
             item.setText(getItem(position));
+
+            item.setPadding(0, 90, 0, 90);
 
             return convertView;
         }
