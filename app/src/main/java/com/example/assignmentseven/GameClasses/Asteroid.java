@@ -1,7 +1,11 @@
 package com.example.assignmentseven.GameClasses;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.MediaMetadataRetriever;
 
 import com.example.assignmentseven.R;
 
@@ -21,6 +25,10 @@ class Asteroid extends DynamicSprite {
     private final double MAX_VELOCITY = 8;
     private final double MIN_VELOCITY = 4;
 
+    private final double HALF = 0.5;
+
+
+
     // which side of screen object spawned
     private boolean spawnedLeft;
 
@@ -38,7 +46,10 @@ class Asteroid extends DynamicSprite {
 
 
     // draws to the screen
-    public void draw(Canvas canvas){ canvas.drawCircle(pos.x,pos.y, radius, paint); }
+    public void draw(Canvas canvas){
+        canvas.drawCircle(pos.x,pos.y, radius, paint);
+
+    }
 
 
     // override move method
@@ -64,7 +75,7 @@ class Asteroid extends DynamicSprite {
 
         // Set random velocity
         velocity.x = screen.rand.nextDouble() * 2 + 1;
-        velocity.y = screen.rand.nextDouble() - 0.5;
+        velocity.y = screen.rand.nextDouble() - HALF;
         velocity.unit().scale(screen.rand.nextDouble() * (MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY);
         velocity.x *= xdir; // Set x velocity by the side it spawns
 
