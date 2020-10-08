@@ -50,7 +50,7 @@
         android:onClick="onClickHighScoreBackButton"
 
         android:text="@string/highscore_button_back"
-        android:textColor="@color/color_orange_yellow_crayola"
+        android:textColor="@color/color_floral_white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

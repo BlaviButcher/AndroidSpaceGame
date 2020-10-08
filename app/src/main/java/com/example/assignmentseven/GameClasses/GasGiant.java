@@ -2,7 +2,6 @@ package com.example.assignmentseven.GameClasses;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 
 import com.example.assignmentseven.GameUtils.Vector;
 import com.example.assignmentseven.R;
