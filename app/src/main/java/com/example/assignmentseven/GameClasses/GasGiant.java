@@ -11,8 +11,8 @@ public class GasGiant extends Sprite {
     public Paint paint = new Paint();
 
     // Dividends used when deciding bounds
-    final double UPPER_DIVIDEND = 0.25;
-    final double LOWER_DIVIDEND = 0.75;
+    private final double UPPER_DIVIDEND = 0.25;
+    private final double LOWER_DIVIDEND = 0.75;
 
     // Radius for rendering the planet
     public int planetRadius;

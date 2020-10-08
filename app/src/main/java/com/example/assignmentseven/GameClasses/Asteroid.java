@@ -14,12 +14,12 @@ class Asteroid extends DynamicSprite {
     public Paint paint = new Paint();
 
     // Dividends used when deciding bounds
-    final double UPPER_DIVIDEND = 0.25;
-    final double LOWER_DIVIDEND = 0.75;
+    private final double UPPER_DIVIDEND = 0.25;
+    private final double LOWER_DIVIDEND = 0.75;
 
     // Min and max velocity for an asteroid
-    final double MAX_VELOCITY = 8;
-    final double MIN_VELOCITY = 4;
+    private final double MAX_VELOCITY = 8;
+    private final double MIN_VELOCITY = 4;
 
     // which side of screen object spawned
     private boolean spawnedLeft;
