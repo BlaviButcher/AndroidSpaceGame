@@ -31,7 +31,7 @@ public class HighScoreActivity extends AppCompatActivity
     // Constants for storing the high scores
     private static String SHARED_PREFERENCES_LOCATION = "high_scores";
     private static String SHARED_PREFERENCES_PREFIX = "score";
-    private static int NUM_SCORES = 5;
+    public static int NUM_SCORES = 5;
 
     // Returns the stored high scores
     public static int[] getHighScores(Context context){

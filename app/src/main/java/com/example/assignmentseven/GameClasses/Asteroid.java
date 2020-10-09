@@ -16,7 +16,7 @@ import com.example.assignmentseven.R;
 
 
 // Asteroid is an obstacle in the game
-class Asteroid extends DynamicSprite {
+public class Asteroid extends DynamicSprite {
 
     public Paint paint = new Paint();
 
@@ -30,7 +30,8 @@ class Asteroid extends DynamicSprite {
 
     private final double HALF = 0.5;
 
-    private final Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
+    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
+
     private final Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
     private final Rect destRect = new Rect();
 
@@ -46,8 +47,6 @@ class Asteroid extends DynamicSprite {
     public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.color_middle_red));
-
-
         respawn();
     }
     public Asteroid(GraphicsView screen, int radius, int colorId){
@@ -58,11 +57,9 @@ class Asteroid extends DynamicSprite {
 
     // draws to the screen
     public void draw(Canvas canvas){
-        //canvas.drawCircle(pos.x,pos.y, radius, paint);
-        destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y - radius);
+        canvas.drawCircle(pos.x,pos.y, radius, paint);
+        destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
         canvas.drawBitmap(bmAsteroid, srcRect, destRect, paint);
-
-
     }
 
 

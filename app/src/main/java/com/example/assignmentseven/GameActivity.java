@@ -16,13 +16,17 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import com.example.assignmentseven.GameClasses.Asteroid;
 
+import com.example.assignmentseven.GameClasses.Asteroid;
 import com.example.assignmentseven.GameClasses.GraphicsView;
 
+import static com.example.assignmentseven.GameClasses.GraphicsView.Classes.Asteroid;
 import static java.security.AccessController.getContext;
 
 public class GameActivity extends AppCompatActivity {
 
+    GraphicsView graphicsView;
     /* Create broadcast receiver so GameActivity can be closed from another activity ie
        game over popup */
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -48,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         // Create graphics view and add to constraintLayout
-        GraphicsView graphicsView = new GraphicsView(this);
+        graphicsView = new GraphicsView(this);
         ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.cl_gamescreen);
         constraintLayout.addView(graphicsView);
 
@@ -84,11 +88,17 @@ public class GameActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        graphicsView.spaceship.bmAsteroid.recycle();
+        graphicsView.planet.bitmap.recycle();
+
+        for (Asteroid a : graphicsView.asteroids)
+            a.bmAsteroid.recycle();
+
+
         doUnbindService();
         Intent music = new Intent();
         music.setClass(this,MusicService.class);
         stopService(music);
-
     }
 
     @Override

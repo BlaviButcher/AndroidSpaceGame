@@ -41,11 +41,11 @@ public class GraphicsView extends View {
 
 
     // Objects in the game
-    private Laser laser;
-    private Asteroid[] asteroids;
-    private Planet planet;
-    private GasGiant gasgiant;
-    private Spaceship spaceship;
+    public Laser laser;
+    public Asteroid[] asteroids;
+    public Planet planet;
+    public GasGiant gasgiant;
+    public Spaceship spaceship;
 
     // Lists of objects sharing traits
     private Sprite[] collidables;
@@ -56,7 +56,7 @@ public class GraphicsView extends View {
     public int lives = 3;
 
     // Number of asteroids we will allow on the screen at once
-    private int numAsteroids = 3;
+    public int numAsteroids = 3;
 
 
     private boolean gameIsOver = false;
@@ -102,7 +102,7 @@ public class GraphicsView extends View {
         planet = new Planet(this, (int)(height * 0.07));
         collidables[numAsteroids  + 2] = planet;
 
-        spaceship = new Spaceship(this, (int) (height * 0.02));
+        spaceship = new Spaceship(this, (int) (height * 0.05));
         collidables[numAsteroids + 3] = spaceship;
     }
 

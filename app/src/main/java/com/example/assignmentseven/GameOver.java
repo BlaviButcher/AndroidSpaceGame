@@ -39,20 +39,9 @@ public class GameOver extends Activity {
         textViewScoreLabel.setText("Your Score: ");
 
 
-
-        if (scores.length < 5)
-        {
+        if (score > scores[scores.length - 1])
             newHighScore();
-        }
 
-        for (int highScore : scores)
-        {
-            if (score > highScore)
-            {
-                newHighScore();
-                break;
-            }
-        }
 
         doBindService();
         Intent music = new Intent();
@@ -94,7 +83,6 @@ public class GameOver extends Activity {
         Intent intent = new Intent("finish_activity");
         sendBroadcast(intent);
         finish();
-
         // Create new Game Activity
         Intent i = new Intent(this, GameActivity.class);
         // Makes the transition not to this weird bouncy thing
