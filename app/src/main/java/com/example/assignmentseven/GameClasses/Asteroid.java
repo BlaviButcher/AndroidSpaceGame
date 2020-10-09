@@ -30,7 +30,7 @@ public class Asteroid extends DynamicSprite {
 
     private final double HALF = 0.5;
 
-    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
+    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.mipmap.spaceship);
 
     private final Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
     private final Rect destRect = new Rect();
@@ -57,7 +57,7 @@ public class Asteroid extends DynamicSprite {
 
     // draws to the screen
     public void draw(Canvas canvas){
-        canvas.drawCircle(pos.x,pos.y, radius, paint);
+       // canvas.drawCircle(pos.x,pos.y, radius, paint);
         destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
         canvas.drawBitmap(bmAsteroid, srcRect, destRect, paint);
     }

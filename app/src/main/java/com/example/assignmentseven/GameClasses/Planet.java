@@ -38,7 +38,7 @@ public class Planet extends Sprite
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(pos.x, pos.y, radius, paint);
+        //canvas.drawCircle(pos.x, pos.y, radius, paint);
         bitmapDestRect.set(pos.x - radius,pos.y -radius, pos.x + radius, pos.y + radius);
         canvas.drawBitmap(bitmap,bitmapSrcRect,bitmapDestRect,null);
     }
