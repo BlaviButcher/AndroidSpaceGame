@@ -328,6 +328,9 @@ public class GraphicsView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getY() < height / 2 || e2.getY() < height / 2)
+                return false;
+
             laser.shoot(new Vector(velocityX, velocityY), spaceship.pos);
             return false;
         }
