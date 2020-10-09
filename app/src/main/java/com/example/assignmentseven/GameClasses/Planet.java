@@ -3,6 +3,7 @@ package com.example.assignmentseven.GameClasses;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorSpace;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
@@ -38,7 +39,7 @@ public class Planet extends Sprite
     public void draw(Canvas canvas) {
         canvas.drawCircle(pos.x, pos.y, radius, paint);
         bitmapDestRect.set(pos.x - radius,pos.y -radius, pos.x + radius, pos.y + radius);
-        canvas.drawBitmap(bitmap,bitmapSrcRect,bitmapDestRect,paint);
+        canvas.drawBitmap(bitmap,bitmapSrcRect,bitmapDestRect,null);
     }
 
     public void respawn()
