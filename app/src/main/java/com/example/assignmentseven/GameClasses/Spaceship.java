@@ -12,7 +12,7 @@ public class Spaceship extends Sprite
 {
     public Paint paint = new Paint();
 
-   public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.spaceship);
+   public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.mipmap.spaceship);
    private Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
    private Rect destRect = new Rect();
 
@@ -30,7 +30,7 @@ public class Spaceship extends Sprite
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawCircle(pos.x, pos.y, radius, paint);
+        //canvas.drawCircle(pos.x, pos.y, radius, paint);
 
         destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
         canvas.drawBitmap(bmAsteroid, srcRect, destRect, paint);

@@ -94,7 +94,6 @@ public class GameActivity extends AppCompatActivity {
         for (Asteroid a : graphicsView.asteroids)
             a.bmAsteroid.recycle();
 
-
         doUnbindService();
         Intent music = new Intent();
         music.setClass(this,MusicService.class);
