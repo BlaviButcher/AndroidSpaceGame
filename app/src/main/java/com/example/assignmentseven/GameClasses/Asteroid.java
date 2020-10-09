@@ -85,15 +85,10 @@ class Asteroid extends DynamicSprite {
 
 
     // Check whether object is out of bounds depending on which side it spawned ie velocity
-    public boolean outOfBounds()
-    {
-        if (pos.y < -radius) return true;
-        else if (pos.y > screen.height + radius) return true;
-        else if (spawnedLeft && pos.x > screen.width + radius) return true;
-        return pos.x < -radius;
+    public boolean outOfBounds() {
+        return pos.y < -radius ||
+                pos.y > screen.height + radius ||
+                spawnedLeft && pos.x > screen.width + radius ||
+                !spawnedLeft && pos.x < -radius;
     }
-
-
-
-
 }
