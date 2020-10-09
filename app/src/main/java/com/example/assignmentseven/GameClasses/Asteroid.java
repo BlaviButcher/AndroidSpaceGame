@@ -5,7 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
+
+import androidx.constraintlayout.solver.widgets.Rectangle;
 
 import com.example.assignmentseven.R;
 
@@ -27,6 +30,12 @@ class Asteroid extends DynamicSprite {
 
     private final double HALF = 0.5;
 
+    private final Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
+    private final Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
+    private final Rect destRect = new Rect();
+
+
+
 
 
     // which side of screen object spawned
@@ -37,6 +46,8 @@ class Asteroid extends DynamicSprite {
     public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.color_middle_red));
+
+
         respawn();
     }
     public Asteroid(GraphicsView screen, int radius, int colorId){
@@ -47,7 +58,10 @@ class Asteroid extends DynamicSprite {
 
     // draws to the screen
     public void draw(Canvas canvas){
-        canvas.drawCircle(pos.x,pos.y, radius, paint);
+        //canvas.drawCircle(pos.x,pos.y, radius, paint);
+        destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y - radius);
+        canvas.drawBitmap(bmAsteroid, srcRect, destRect, paint);
+
 
     }
 

@@ -303,18 +303,12 @@ public class GraphicsView extends View {
         float y = event.getY();
 
 
-
-
-        //float bounds = height / 3f;
-        //bounds = height - bounds;
-        //Log.d("blavi", ""+ bounds);
         // Stops multispawning - check if laser is currently flyinng
         if(laser.hidden)
         {
             //if(y < bounds) return false;
             if (gestureDetector.onTouchEvent(event))
                 return true;
-            //return super.onTouchEvent(event);
         }
         return false;
     }
