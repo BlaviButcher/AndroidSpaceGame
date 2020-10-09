@@ -1,7 +1,10 @@
 package com.example.assignmentseven.GameClasses;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 import com.example.assignmentseven.R;
 
@@ -9,6 +12,9 @@ import com.example.assignmentseven.R;
 public class Planet extends Sprite
 {
     public Paint paint = new Paint();
+    private final Bitmap bitmap = BitmapFactory.decodeResource(screen.getContext().getResources(), R.mipmap.planet_foreground);
+    private final Rect bitmapSrcRect = new Rect(0,0, bitmap.getWidth(), bitmap.getHeight());
+    private final Rect bitmapDestRect = new Rect();
 
     // Need a little space between asteroids and planets - currently 5%
     private final double LOWER_DIVIDEND = 0.25;
@@ -29,9 +35,10 @@ public class Planet extends Sprite
 
 
     @Override
-    public void draw(Canvas canvas)
-    {
+    public void draw(Canvas canvas) {
         canvas.drawCircle(pos.x, pos.y, radius, paint);
+        bitmapDestRect.set(pos.x - radius,pos.y -radius, pos.x + radius, pos.y + radius);
+        canvas.drawBitmap(bitmap,bitmapSrcRect,bitmapDestRect,paint);
     }
 
     public void respawn()
