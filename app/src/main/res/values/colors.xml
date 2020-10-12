@@ -13,5 +13,7 @@
     <color name="color_laser_outline">#66FF1111</color>
 
 
-    <color name="color_gas_giant">#77777777</color>
+    <color name="color_gas_giant_background">#3777</color>
+    <color name="color_gas_giant_foreground">#7F3F5510</color>
+
 </resources>

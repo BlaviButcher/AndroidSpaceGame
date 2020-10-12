@@ -53,7 +53,7 @@ public class GraphicsView extends View {
 
     // Tracks state of the game
     public int score = 0;
-    public int lives = 3;
+    public int lives = 50;
 
     // Number of asteroids we will allow on the screen at once
     public int numAsteroids = 3;
@@ -96,7 +96,7 @@ public class GraphicsView extends View {
         collidables[numAsteroids] = laser;
         movables[numAsteroids] = laser;
 
-        gasgiant = new GasGiant(this,(int)(height * 0.05), (int)(height * 0.1));
+        gasgiant = new GasGiant(this,(int)(height * 0.05), (int)(height * 0.18));
         collidables[numAsteroids + 1] = gasgiant;
 
         planet = new Planet(this, (int)(height * 0.07));
