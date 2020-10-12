@@ -65,7 +65,6 @@ public class Asteroid extends DynamicSprite {
                 canvas.drawBitmap(bitmap, srcRect, destRect, null);
                 break;
 
-
             case Exploding:
                 canvas.drawBitmap(screen.explosions[explosionIdx / explosionLength], srcRect, destRect, null);
                 explosionIdx++;
