@@ -53,7 +53,7 @@ public class GraphicsView extends View {
 
     // Tracks state of the game
     public int score = 0;
-    public int lives = 50;
+    public int lives = 3;
 
     // Number of asteroids we will allow on the screen at once
     public int numAsteroids = 3;
@@ -128,17 +128,12 @@ public class GraphicsView extends View {
         for (Sprite s : collidables)
             s.draw(canvas);
 
-        drawText(canvas);
-
-
+        drawGameState(canvas);
 
 
         if(lives <= 0 && !gameIsOver)
         {
             gameIsOver = true;
-            /* Because the draw method is called so quickly ~.0500 milliseconds apart
-            This would be called again before the activity is properly closed
-            This caused the 5 highscores to always be the same */
             gameOver();
         }
 
@@ -174,7 +169,7 @@ public class GraphicsView extends View {
                     case Asteroid:
                         ((Laser) a).hide();
                         ((Asteroid) b).respawn();
-                        lives--;
+                        decrementLives();
                         break;
 
                     case GasGiant:
@@ -247,16 +242,18 @@ public class GraphicsView extends View {
 
 
     // renders the score and life count to the screen
-    private void drawText(Canvas canvas)
+    private void drawGameState(Canvas canvas)
     {
         canvas.drawText("Score: " + score, 30, this.height - 30, paintText);
         canvas.drawText("Lives: " + lives, width - 230, this.height - 30, paintText);
     }
-    // increments score
-    private void increaseScore()
+
+    // Have these in functions so we could add things to occur when these are changed
+    public void increaseScore()
     {
        score++;
     }
+    public void decrementLives() { lives--; }
 
 
 

@@ -63,7 +63,7 @@ class Laser extends DynamicSprite {
     public void move() {
         if (outOfBounds()){
             hide();
-            screen.lives--;
+            screen.decrementLives();
         } else {
             for (int i = tailLength-2; i >= 0; i--)
                 tail[i+1] = tail[i];
