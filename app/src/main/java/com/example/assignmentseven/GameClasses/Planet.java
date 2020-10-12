@@ -14,7 +14,7 @@ public class Planet extends Sprite
 {
     public Paint paint = new Paint();
 
-    public final Bitmap bitmap = BitmapFactory.decodeResource(screen.getContext().getResources(), R.mipmap.planet_foreground);
+    public final Bitmap bitmap = BitmapFactory.decodeResource(screen.getContext().getResources(), R.drawable.planet_foreground);
     private final Rect bitmapSrcRect = new Rect(0,0, bitmap.getWidth(), bitmap.getHeight());
     private final Rect bitmapDestRect = new Rect();
 

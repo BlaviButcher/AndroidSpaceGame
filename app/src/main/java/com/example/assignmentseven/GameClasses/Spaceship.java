@@ -12,7 +12,7 @@ public class Spaceship extends Sprite
 {
     public Paint paint = new Paint();
 
-   public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.mipmap.spaceship);
+   public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.spaceship);
    private Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
    private Rect destRect = new Rect();
 

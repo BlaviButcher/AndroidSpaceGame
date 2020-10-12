@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
+import android.util.Log;
 
 import androidx.constraintlayout.solver.widgets.Rectangle;
 
@@ -30,9 +31,9 @@ public class Asteroid extends DynamicSprite {
 
     private final double HALF = 0.5;
 
-    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.mipmap.spaceship);
+    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
 
-    private final Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
+    private final Rect srcRect;
     private final Rect destRect = new Rect();
 
 
@@ -47,10 +48,9 @@ public class Asteroid extends DynamicSprite {
     public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
         this.paint.setColor(getColor(R.color.color_middle_red));
-        respawn();
-    }
-    public Asteroid(GraphicsView screen, int radius, int colorId){
-        super(screen, 0, 0, radius);
+        Log.d("AST", bmAsteroid.toString());
+        srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
+
         respawn();
     }
 
