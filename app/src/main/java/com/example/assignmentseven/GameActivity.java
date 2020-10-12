@@ -93,7 +93,6 @@ public class GameActivity extends AppCompatActivity {
         graphicsView.planet.bitmap.recycle();
         for (Asteroid a : graphicsView.asteroids){
             a.bitmap.recycle();
-            a.explosionsBitmap.recycle();
         }
 
         doUnbindService();

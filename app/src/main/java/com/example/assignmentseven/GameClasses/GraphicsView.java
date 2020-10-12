@@ -4,6 +4,8 @@ package com.example.assignmentseven.GameClasses;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
@@ -28,16 +30,18 @@ public class GraphicsView extends View {
 
     // Dimensions of activity bounds
     public int width, height;
-    Random rand;
+
+    // Public random instance for all classes to use
+    public Random rand;
 
     // Gesture detector
     private GestureDetector gestureDetector;
 
-    // This is the scaler that we will reduce the fling variables by
-    private static double flingDampener = 500;
-
     // Color of the text we render to screen
     private Paint paintText;
+
+    // A bitmap array of explosion states for our classes to use
+    public Bitmap[] explosions;
 
 
     // Objects in the game
@@ -78,6 +82,17 @@ public class GraphicsView extends View {
 
         // Add custom gesture listener
         gestureDetector = new GestureDetector(context, new GestureListener());
+
+
+        // Populate explosions bitmap array
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.explosions);
+        explosions = new Bitmap[25];
+        int width = bm.getHeight() / 5;
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++ )
+                explosions[i * 5 + j] = Bitmap.createBitmap(bm, j * width, i * width,  width,  width);
+
+
 
         // Initilise and populate lists
         collidables = new Sprite[numAsteroids + 4];
@@ -155,7 +170,6 @@ public class GraphicsView extends View {
         // Switch so always ordered
         if (typeA.ordinal() > typeB.ordinal()){
             Classes tmpC = typeA; typeA = typeB; typeB = tmpC;
-            // if types are switch, then sprites are switched to reflect
             Sprite  tmpS = a; a = b; b = tmpS;
         }
 
@@ -178,8 +192,9 @@ public class GraphicsView extends View {
 
                     case Planet:
                         ((Laser) a).hide();
-                        ((Planet) b).respawn();
-                        increaseScore();
+                        ((Planet) b).explode();
+                        incrementScore();
+                        break;
 
                     case Spaceship:
                         break;
@@ -199,35 +214,41 @@ public class GraphicsView extends View {
 
                     case Planet:
                         ((Asteroid) a).explode();
+                        break;
 
                     case Spaceship:
                         ((Asteroid) a).explode();
                         break;
                 }
+                break;
 
 
             case GasGiant:
                 switch (typeB){
                     case GasGiant:
+                        ((GasGiant) a).respawn();
                         break;
 
                     case Planet:
+                        ((GasGiant) a).respawn();
                         break;
 
                     case Spaceship:
+                        ((GasGiant) a).respawn();
                         break;
                 }
+                break;
 
 
 
             case Planet:
                 switch (typeB){
-                 case Planet:
+                    case Planet:
                         break;
-
                     case Spaceship:
                         break;
                 }
+                break;
 
 
             case Spaceship:
@@ -235,6 +256,7 @@ public class GraphicsView extends View {
                  case Spaceship:
                         break;
                 }
+                break;
         }
     }
 
@@ -249,7 +271,7 @@ public class GraphicsView extends View {
     }
 
     // Have these in functions so we could add things to occur when these are changed
-    public void increaseScore()
+    public void incrementScore()
     {
        score++;
     }
@@ -295,20 +317,7 @@ public class GraphicsView extends View {
 
     // For the gesture detection
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-
-
-        // Stops multispawning - check if laser is currently flyinng
-        if(laser.hidden)
-        {
-            //if(y < bounds) return false;
-            if (gestureDetector.onTouchEvent(event))
-                return true;
-        }
-        return false;
-    }
+    public boolean onTouchEvent(MotionEvent event) { return gestureDetector.onTouchEvent(event); }
 
     // Gesture listener class - extends SimpleOnGestureListener that returns false for every other event
     // other than the ones we care about. We only need to worry about onFling event
@@ -319,10 +328,8 @@ public class GraphicsView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getY() < height / 2 || e2.getY() < height / 2)
-                return false;
-
-            laser.shoot(new Vector(velocityX, velocityY), spaceship.pos);
+            if (laser.isHidden())
+                laser.shoot(new Vector(velocityX, velocityY), spaceship.pos);
             return false;
         }
     }

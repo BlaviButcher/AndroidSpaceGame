@@ -14,12 +14,14 @@ import com.example.assignmentseven.R;
 class Laser extends DynamicSprite {
 
     // Laser State
+    private enum State {
+        Shoot, Hidden
+    }
+    Laser.State state;
 
     // tail is the trailing circles for the laser
-    private static int tailLength = 3;
+    private static int tailLength = 4;
     private Point[] tail;
-
-    public boolean hidden = true;
 
     // Class constants
 
@@ -44,17 +46,22 @@ class Laser extends DynamicSprite {
         tail = new Point[tailLength];
         for (int i = 0; i < tailLength; i++)
             tail[i] = pos.copy();
+        hide();
     }
 
 
     // draws to the screen
     public void draw(Canvas canvas){
-        canvas.drawCircle(pos.x, pos.y, outlineRadius, outlinePaint);
-        for (Point p : tail)
-            canvas.drawCircle(p.x, p.y, outlineRadius, outlinePaint);
+        switch (state) {
+            case Shoot:
+                canvas.drawCircle(pos.x, pos.y, outlineRadius, outlinePaint);
+                for (Point p : tail)
+                    canvas.drawCircle(p.x, p.y, outlineRadius, outlinePaint);
 
-        for (Point p : tail)
-            canvas.drawCircle(p.x, p.y, radius, laserPaint);
+                for (Point p : tail)
+                    canvas.drawCircle(p.x, p.y, radius, laserPaint);
+                break;
+        }
     }
 
 
@@ -76,8 +83,9 @@ class Laser extends DynamicSprite {
     public void hide(){
         pos.x = -500; pos.y = -500;
         velocity = new Vector();
-        hidden = true;
+        state = State.Hidden;
     }
+    public boolean isHidden(){return state == State.Hidden;}
 
     // Shoots the laser
     public void shoot(Vector vel, Point spaceship){
@@ -87,13 +95,13 @@ class Laser extends DynamicSprite {
             tail[i] = pos.copy();
 
         setVelocity(vel);
-        hidden = false;
+        state = State.Shoot;
     }
 
 
     // This is true if the laser is out of the screen and should be destroyed
     public boolean outOfBounds(){
-        if (hidden) return false;
+        if (state == State.Hidden) return false;
         return pos.x > screen.width ||
                 pos.y > screen.height ||
                 pos.x < 0 ||
