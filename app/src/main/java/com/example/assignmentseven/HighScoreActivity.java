@@ -56,6 +56,9 @@ public class HighScoreActivity extends AppCompatActivity
     }
 
 
+
+    // Lifecycle methods
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -71,21 +74,13 @@ public class HighScoreActivity extends AppCompatActivity
         // Get high scores
         int[] scores = getHighScores(getApplicationContext());
         String[] formattedScores = new String[scores.length];
-        for (int i = 0; i < formattedScores.length; i++) {
+        for (int i = 0; i < formattedScores.length; i++)
             formattedScores[i] = "" + scores[i];
-            Log.d("blavi", i + "  -  " + formattedScores[i]);
-        }
 
         // Set into list view
         CustomAdaptor arrayAdapter = new CustomAdaptor(this, R.layout.highscore_adaptor, formattedScores);
         ListView highScoreListView = (ListView) findViewById(R.id.lv_highscores);
         highScoreListView.setAdapter(arrayAdapter);
-
-
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
     }
 
 
@@ -112,8 +107,6 @@ public class HighScoreActivity extends AppCompatActivity
             TextView item = (TextView) convertView.findViewById(R.id.tv_1);
 
 
-
-
             item.setText(getItem(position));
 
             item.setPadding(0, 90, 0, 90);
@@ -133,63 +126,11 @@ public class HighScoreActivity extends AppCompatActivity
         getSupportActionBar().hide();
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        doUnbindService();
-        Intent music = new Intent();
-        music.setClass(this,MusicService.class);
-        stopService(music);
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        mServ.pauseMusic();
-
     }
 
 
     public void onClickHighScoreBackButton(View view)
     {
         finish();
-    }
-
-
-    private boolean mIsBound = false;
-    private MusicService mServ;
-    private ServiceConnection Scon =new ServiceConnection(){
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder)binder).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
-    void doBindService(){
-        bindService(new Intent(this,MusicService.class),
-                Scon,Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService()
-    {
-        if(mIsBound)
-        {
-            unbindService(Scon);
-            mIsBound = false;
-        }
     }
 }

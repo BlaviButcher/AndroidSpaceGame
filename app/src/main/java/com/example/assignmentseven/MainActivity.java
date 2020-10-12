@@ -1,6 +1,10 @@
 package com.example.assignmentseven;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,7 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LifecycleObserver {
     MediaPlayer player;
 
     @Override
@@ -24,17 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Bind music service
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-
+        player = MediaPlayer.create(getApplicationContext(), R.raw.song);
+        player.setLooping(true);
+        player.start();
     }
 
     protected void onResume() {
-        super.onResume();
 
         // Hide actionbar
         getSupportActionBar().hide();
@@ -42,28 +43,16 @@ public class MainActivity extends AppCompatActivity {
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        // Resume music
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-
-
+        super.onResume();
     }
 
-    protected void onPause() {
-        super.onPause();
-        mServ.pauseMusic();
-
-    }
 
     protected void onDestroy() {
         super.onDestroy();
 
-        // Unbind music
-        doUnbindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        stopService(music);
+        // Remove music player
+        player.stop();
+        player.release();
     }
 
 
@@ -79,34 +68,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
-    // Music Stuff
-
-    private boolean mIsBound = false;
-    private MusicService mServ;
-    private ServiceConnection Scon = new ServiceConnection() {
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder) binder).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
-    void doBindService() {
-        bindService(new Intent(this, MusicService.class),
-                Scon, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
+    // Event for app being put in background
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onAppBackgrounded() {
+        player.pause();
     }
 
-    void doUnbindService() {
-        if (mIsBound) {
-            unbindService(Scon);
-            mIsBound = false;
-        }
+    // Event for app being put in foreground
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onAppForegrounded() {
+        player.start();
     }
-
 }
