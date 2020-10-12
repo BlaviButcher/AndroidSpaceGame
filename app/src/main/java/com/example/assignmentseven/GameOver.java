@@ -7,9 +7,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import org.w3c.dom.Text;
 
 public class GameOver extends Activity {
 
@@ -48,6 +54,7 @@ public class GameOver extends Activity {
 
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
     }
 
     @Override
