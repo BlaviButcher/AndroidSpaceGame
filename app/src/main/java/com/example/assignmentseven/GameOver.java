@@ -17,7 +17,7 @@ public class GameOver extends Activity {
     private int[] scores;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_game_over);
@@ -41,33 +41,18 @@ public class GameOver extends Activity {
 
         if (score > scores[scores.length - 1])
             newHighScore();
-
-
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
     }
 
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         // Enable fullscreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        mServ.pauseMusic();
-
     }
 
     public void onClickMenuButton(View view) {
@@ -92,38 +77,8 @@ public class GameOver extends Activity {
 
     }
 
-    public void newHighScore()
-    {
+    public void newHighScore() {
         TextView textViewScoreLabel = (TextView) findViewById(R.id.tv_new_high_score_label);
         textViewScoreLabel.setText("New High Score!!!");
-    }
-
-    private boolean mIsBound = false;
-    private MusicService mServ;
-    private ServiceConnection Scon =new ServiceConnection(){
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder)binder).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
-    void doBindService(){
-        bindService(new Intent(this,MusicService.class),
-                Scon, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService()
-    {
-        if(mIsBound)
-        {
-            unbindService(Scon);
-            mIsBound = false;
-        }
     }
 }
