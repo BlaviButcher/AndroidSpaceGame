@@ -168,7 +168,7 @@ public class GraphicsView extends View {
 
                     case Asteroid:
                         ((Laser) a).hide();
-                        ((Asteroid) b).respawn();
+                        ((Asteroid) b).explode();
                         decrementLives();
                         break;
 
@@ -189,8 +189,8 @@ public class GraphicsView extends View {
             case Asteroid:
                 switch (typeB){
                     case Asteroid:
-                        ((Asteroid) a).respawn();
-                        ((Asteroid) b).respawn();
+                        ((Asteroid) a).explode();
+                        ((Asteroid) b).explode();
                         break;
 
                     case GasGiant:
@@ -198,10 +198,10 @@ public class GraphicsView extends View {
                         break;
 
                     case Planet:
-                        ((Asteroid) a).respawn();
+                        ((Asteroid) a).explode();
 
                     case Spaceship:
-                        ((Asteroid) a).respawn();
+                        ((Asteroid) a).explode();
                         break;
                 }
 
