@@ -11,9 +11,6 @@ public class GasGiant extends Sprite {
     public Paint backgroundPaint = new Paint();
     public Paint foregroundPaint = new Paint();
 
-    // Dividends used when deciding bounds
-    private final double UPPER_DIVIDEND = 0.25;
-    private final double LOWER_DIVIDEND = 0.75;
 
     // Radius for rendering the planet
     public int planetRadius;
@@ -38,7 +35,7 @@ public class GasGiant extends Sprite {
     public void respawn()
     {
         pos.x = screen.randIntInRange(radius, screen.width-radius);
-        pos.y = screen.randIntInRange((int) (screen.height * UPPER_DIVIDEND), (int)(screen.height * LOWER_DIVIDEND));
+        pos.y = screen.randIntInRange(radius, screen.height-radius);
     }
 
     // pull gets the distance between itself and another sprite and
