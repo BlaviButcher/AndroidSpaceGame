@@ -7,9 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
+import android.util.Log;
 
 import androidx.constraintlayout.solver.widgets.Rectangle;
 
+import com.example.assignmentseven.GameUtils.Point;
 import com.example.assignmentseven.R;
 
 
@@ -17,8 +19,11 @@ import com.example.assignmentseven.R;
 
 // Asteroid is an obstacle in the game
 public class Asteroid extends DynamicSprite {
-
-    public Paint paint = new Paint();
+    // Set the state for the asteroid
+    private enum State{
+        Moving, Exploding
+    }
+    private State state;
 
     // Dividends used when deciding bounds
     private final double UPPER_DIVIDEND = 0.25;
@@ -30,13 +35,16 @@ public class Asteroid extends DynamicSprite {
 
     private final double HALF = 0.5;
 
-    public Bitmap bmAsteroid = BitmapFactory.decodeResource(screen.getResources(), R.mipmap.spaceship);
+    public Bitmap bitmap = BitmapFactory.decodeResource(screen.getResources(), R.drawable.asteroid);
 
-    private final Rect srcRect = new Rect(0, 0, bmAsteroid.getWidth(), bmAsteroid.getHeight());
+    public Bitmap explosionsBitmap = BitmapFactory.decodeResource(screen.getResources(), R.drawable.explosions);
+    private static int explosionPixelSize = 64; // Size of each sprite
+    private static int explosionCount = 4; // Number of sprites per row/col (it's a square bitmap)
+    private int explosionX, explosionY;
+
+
+    private final Rect srcRect = new Rect();
     private final Rect destRect = new Rect();
-
-
-
 
 
     // which side of screen object spawned
@@ -46,20 +54,29 @@ public class Asteroid extends DynamicSprite {
     // Constructors
     public Asteroid(GraphicsView screen, int radius){
         super(screen, 0, 0, radius);
-        this.paint.setColor(getColor(R.color.color_middle_red));
-        respawn();
-    }
-    public Asteroid(GraphicsView screen, int radius, int colorId){
-        super(screen, 0, 0, radius);
         respawn();
     }
 
 
     // draws to the screen
     public void draw(Canvas canvas){
-       // canvas.drawCircle(pos.x,pos.y, radius, paint);
-        destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
-        canvas.drawBitmap(bmAsteroid, srcRect, destRect, paint);
+        switch (state){
+            case Moving:
+                destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
+                canvas.drawBitmap(bitmap, srcRect, destRect, null);
+                break;
+
+
+            case Exploding:
+                srcRect.set(explosionX * explosionPixelSize, explosionY * explosionPixelSize, (explosionX + 1) * explosionPixelSize, (explosionY + 1) * explosionPixelSize);
+                destRect.set(pos.x - radius, pos.y - radius, pos.x + radius, pos.y + radius);
+                canvas.drawBitmap(explosionsBitmap, srcRect, destRect, null);
+
+                if(explosionX < explosionCount) {explosionX++;}
+                else if(explosionY < explosionCount) {explosionY++; explosionX = 0;}
+                else respawn();
+                break;
+        }
     }
 
 
@@ -72,9 +89,29 @@ public class Asteroid extends DynamicSprite {
             super.move();
     }
 
-    // respawns the asteroid
-    public void respawn()
+    // explode the asteroid
+    public void explode()
     {
+        velocity.x = 0; velocity.y = 0;
+        state = State.Exploding;
+        explosionX = 0; explosionY = 0;
+    }
+
+
+    // Check whether object is out of bounds depending on which side it spawned ie velocity
+    public boolean outOfBounds() {
+        return pos.y < -radius ||
+                pos.y > screen.height + radius ||
+                spawnedLeft && pos.x > screen.width + radius ||
+                !spawnedLeft && pos.x < -radius;
+    }
+
+    // Set the src rect to the full asteroid bitmap
+    private void respawn(){
+        state = State.Moving;
+        srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+
         // Decided if the asteroid spawns on the left or right
         spawnedLeft = screen.rand.nextBoolean();
         double xdir = 1;
@@ -92,14 +129,5 @@ public class Asteroid extends DynamicSprite {
 
         // Get random spawn location between bounds
         pos.y = (int) screen.randDoubleInRange(screen.height * LOWER_DIVIDEND, screen.height * UPPER_DIVIDEND);
-    }
-
-
-    // Check whether object is out of bounds depending on which side it spawned ie velocity
-    public boolean outOfBounds() {
-        return pos.y < -radius ||
-                pos.y > screen.height + radius ||
-                spawnedLeft && pos.x > screen.width + radius ||
-                !spawnedLeft && pos.x < -radius;
     }
 }

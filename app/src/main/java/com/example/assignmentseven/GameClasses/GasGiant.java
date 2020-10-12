@@ -8,7 +8,8 @@ import com.example.assignmentseven.R;
 
 public class GasGiant extends Sprite {
 
-    public Paint paint = new Paint();
+    public Paint backgroundPaint = new Paint();
+    public Paint foregroundPaint = new Paint();
 
     // Dividends used when deciding bounds
     private final double UPPER_DIVIDEND = 0.25;
@@ -20,13 +21,17 @@ public class GasGiant extends Sprite {
     // Constructors
     public GasGiant(GraphicsView screen, int planetRadius, int radius){
         super(screen, 0, 0, radius);
-        this.paint.setColor(getColor(R.color.color_gas_giant));
+        this.backgroundPaint.setColor(getColor(R.color.color_gas_giant_background));
+        this.foregroundPaint.setColor(getColor(R.color.color_gas_giant_foreground));
         this.planetRadius = planetRadius;
         respawn();
     }
 
     // draws to the screen
-    public void draw(Canvas canvas){ canvas.drawCircle(pos.x,pos.y, planetRadius, paint); }
+    public void draw(Canvas canvas){
+        canvas.drawCircle(pos.x,pos.y, radius, backgroundPaint );
+        canvas.drawCircle(pos.x,pos.y, planetRadius, foregroundPaint );
+    }
 
 
     // gives the gas giant a random position in it's spawning zone

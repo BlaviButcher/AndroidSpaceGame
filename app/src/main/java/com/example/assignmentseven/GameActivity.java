@@ -88,11 +88,13 @@ public class GameActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        // Recycle bitmaps to save memory
         graphicsView.spaceship.bmAsteroid.recycle();
         graphicsView.planet.bitmap.recycle();
-
-        for (Asteroid a : graphicsView.asteroids)
-            a.bmAsteroid.recycle();
+        for (Asteroid a : graphicsView.asteroids){
+            a.bitmap.recycle();
+            a.explosionsBitmap.recycle();
+        }
 
         doUnbindService();
         Intent music = new Intent();
