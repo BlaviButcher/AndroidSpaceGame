@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Monitors whether app is in back or foreground
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         player = MediaPlayer.create(getApplicationContext(), R.raw.song);

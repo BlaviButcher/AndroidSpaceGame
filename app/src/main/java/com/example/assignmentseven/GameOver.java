@@ -58,16 +58,17 @@ public class GameOver extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        toMenu();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
     }
 
     public void onClickMenuButton(View view) {
-
-        // Tell GameActivity to finish
-        Intent intent = new Intent("finish_activity");
-        sendBroadcast(intent);
-        finish();
+        toMenu();
     }
 
     public void onClickRetryButton(View view) {
@@ -87,5 +88,12 @@ public class GameOver extends Activity {
     public void newHighScore() {
         TextView textViewScoreLabel = (TextView) findViewById(R.id.tv_new_high_score_label);
         textViewScoreLabel.setText("New High Score!!!");
+    }
+
+    public void toMenu() {
+        // Tell GameActivity to finish
+        Intent intent = new Intent("finish_activity");
+        sendBroadcast(intent);
+        finish();
     }
 }
