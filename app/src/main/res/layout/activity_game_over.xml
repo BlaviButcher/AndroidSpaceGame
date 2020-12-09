@@ -76,12 +76,4 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="24sp"
         />
-
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
